@@ -25,24 +25,24 @@ servers:
     description: Local Ollama Server
 
 tags:
-  - name: Generate
+  - name: Blobs
     description: >-
-      Generate text completions from a prompt using a specified model.
+      Manage binary large objects used by models.
   - name: Chat
     description: >-
       Generate chat completions with multi-turn conversation support.
   - name: Embeddings
     description: >-
       Generate vector embeddings from text input.
+  - name: Generate
+    description: >-
+      Generate text completions from a prompt using a specified model.
   - name: Models
     description: >-
       List, show, create, copy, pull, push, and delete models.
   - name: Running Models
     description: >-
       View models currently loaded in memory and their resource usage.
-  - name: Blobs
-    description: >-
-      Manage binary large objects used by models.
   - name: Version
     description: >-
       Retrieve the Ollama server version.

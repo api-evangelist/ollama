@@ -1,14 +1,13 @@
 aid: ollama
-url: 
-  https://raw.githubusercontent.com/api-evangelist/ollama/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/ollama/refs/heads/main/apis.yml
 apis:
   - aid: ollama:ollama-api
     name: Ollama API
     tags:
-      - Models
+      - Inference
       - Large Language Models
       - Local AI
-      - Inference
+      - Models
     humanURL: https://docs.ollama.com/api/introduction
     baseURL: http://localhost:11434/api
     properties:
@@ -61,10 +60,10 @@ apis:
   - aid: ollama:ollama-openai-compatibility-api
     name: Ollama OpenAI Compatibility API
     tags:
-      - OpenAI
+      - Chat
       - Compatibility
       - Large Language Models
-      - Chat
+      - OpenAI
     humanURL: https://docs.ollama.com/api/openai-compatibility
     baseURL: http://localhost:11434/v1
     properties:
@@ -81,9 +80,9 @@ apis:
     name: Ollama Anthropic Compatibility API
     tags:
       - Anthropic
+      - Chat
       - Compatibility
       - Large Language Models
-      - Chat
     humanURL: https://docs.ollama.com/api/anthropic-compatibility
     baseURL: http://localhost:11434
     properties:
@@ -100,8 +99,8 @@ apis:
     name: Ollama Cloud API
     tags:
       - Cloud
-      - Large Language Models
       - Inference
+      - Large Language Models
     humanURL: https://docs.ollama.com/cloud
     baseURL: https://ollama.com/api
     properties:
@@ -142,13 +141,11 @@ common:
     name: FAQ - Ollama
     type: FAQ
     description: 'null'
-  - url: 
-      https://signin.ollama.com/?client_id=client_01JX0QMHD43PFFCCNXH82A6K8B&redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8
+  - url: https://signin.ollama.com/?client_id=client_01JX0QMHD43PFFCCNXH82A6K8B&redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8
     name: Sign in
     type: Login
     description: 'null'
-  - url: 
-      https://signin.ollama.com/sign-up?redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8
+  - url: https://signin.ollama.com/sign-up?redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8
     name: Sign up
     type: SignUp
     description: 'null'

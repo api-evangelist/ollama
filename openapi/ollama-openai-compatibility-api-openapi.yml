@@ -35,14 +35,14 @@ tags:
     description: >-
       Generate vector embeddings using the OpenAI-compatible embeddings
       endpoint.
-  - name: Models
-    description: >-
-      List and retrieve model information using the OpenAI-compatible
-      models endpoints.
   - name: Images
     description: >-
       Generate images from text descriptions using the OpenAI-compatible
       images endpoint. Experimental feature.
+  - name: Models
+    description: >-
+      List and retrieve model information using the OpenAI-compatible
+      models endpoints.
   - name: Responses
     description: >-
       Generate structured responses with optional reasoning using the
