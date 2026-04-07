@@ -55,7 +55,7 @@ paths:
   /chat/completions:
     post:
       operationId: createChatCompletion
-      summary: Create chat completion
+      summary: Ollama Create chat completion
       description: >-
         Creates a model response for the given chat conversation. Supports
         streaming, JSON mode, structured output, vision, and tool calling.
@@ -86,7 +86,7 @@ paths:
   /completions:
     post:
       operationId: createCompletion
-      summary: Create completion
+      summary: Ollama Create completion
       description: >-
         Creates a completion for the provided prompt. Compatible with the
         OpenAI Completions API format. Supports streaming, JSON mode,
@@ -117,7 +117,7 @@ paths:
   /embeddings:
     post:
       operationId: createEmbedding
-      summary: Create embeddings
+      summary: Ollama Create embeddings
       description: >-
         Creates an embedding vector representing the input text. Compatible
         with the OpenAI Embeddings API format.
@@ -144,7 +144,7 @@ paths:
   /models:
     get:
       operationId: listModels
-      summary: List models
+      summary: Ollama List models
       description: >-
         Lists the currently available models and provides basic information
         about each one. Compatible with the OpenAI List Models API format.
@@ -161,7 +161,7 @@ paths:
   /models/{model}:
     get:
       operationId: retrieveModel
-      summary: Retrieve a model
+      summary: Ollama Retrieve a model
       description: >-
         Retrieves a model instance, providing basic information about the
         model. Compatible with the OpenAI Retrieve Model API format.
@@ -188,7 +188,7 @@ paths:
   /images/generations:
     post:
       operationId: createImage
-      summary: Create image
+      summary: Ollama Create image
       description: >-
         Creates an image given a text prompt. This is an experimental
         endpoint that may change or be removed. Only supports
@@ -216,7 +216,7 @@ paths:
   /responses:
     post:
       operationId: createResponse
-      summary: Create response
+      summary: Ollama Create response
       description: >-
         Creates a structured response with optional reasoning. Supports
         streaming, tool calling, and reasoning summaries. Compatible

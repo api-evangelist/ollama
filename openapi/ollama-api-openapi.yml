@@ -51,7 +51,7 @@ paths:
   /api/generate:
     post:
       operationId: generateCompletion
-      summary: Generate a completion
+      summary: Ollama Generate a completion
       description: >-
         Generate a response for a given prompt with a provided model. This is a
         streaming endpoint that returns a sequence of JSON objects by default.
@@ -93,7 +93,7 @@ paths:
   /api/chat:
     post:
       operationId: generateChatCompletion
-      summary: Generate a chat completion
+      summary: Ollama Generate a chat completion
       description: >-
         Generate the next message in a chat with a provided model. This is a
         streaming endpoint that returns a sequence of JSON objects by default.
@@ -135,7 +135,7 @@ paths:
   /api/embed:
     post:
       operationId: generateEmbeddings
-      summary: Generate embeddings
+      summary: Ollama Generate embeddings
       description: >-
         Generate vector embeddings from a model for a given text input or
         array of text inputs. Useful for semantic search, clustering, and
@@ -171,7 +171,7 @@ paths:
   /api/tags:
     get:
       operationId: listModels
-      summary: List local models
+      summary: Ollama List local models
       description: >-
         List all models that are available locally on the Ollama server,
         including their size, digest, and metadata details.
@@ -188,7 +188,7 @@ paths:
   /api/show:
     post:
       operationId: showModelInfo
-      summary: Show model information
+      summary: Ollama Show model information
       description: >-
         Show detailed information about a model including parameters, template,
         license, system prompt, capabilities, and model metadata.
@@ -217,7 +217,7 @@ paths:
   /api/create:
     post:
       operationId: createModel
-      summary: Create a model
+      summary: Ollama Create a model
       description: >-
         Create a model from an existing model with optional customizations
         including system prompt, template, parameters, and quantization.
@@ -252,7 +252,7 @@ paths:
   /api/copy:
     post:
       operationId: copyModel
-      summary: Copy a model
+      summary: Ollama Copy a model
       description: >-
         Create a copy of an existing model under a new name. This creates
         a duplicate that can be modified independently.
@@ -277,7 +277,7 @@ paths:
   /api/pull:
     post:
       operationId: pullModel
-      summary: Pull a model
+      summary: Ollama Pull a model
       description: >-
         Download a model from the Ollama model registry. Streams progress
         updates by default with status, digest, and byte transfer information.
@@ -311,7 +311,7 @@ paths:
   /api/push:
     post:
       operationId: pushModel
-      summary: Push a model
+      summary: Ollama Push a model
       description: >-
         Upload a model to the Ollama model registry for sharing. Requires
         authentication. Streams progress updates by default.
@@ -351,7 +351,7 @@ paths:
   /api/delete:
     delete:
       operationId: deleteModel
-      summary: Delete a model
+      summary: Ollama Delete a model
       description: >-
         Delete a model and its data from the local Ollama server. This
         permanently removes the model files from disk.
@@ -376,7 +376,7 @@ paths:
   /api/ps:
     get:
       operationId: listRunningModels
-      summary: List running models
+      summary: Ollama List running models
       description: >-
         List models that are currently loaded into memory on the Ollama
         server, including their VRAM usage, context length, and expiration
@@ -394,7 +394,7 @@ paths:
   /api/blobs/{digest}:
     head:
       operationId: checkBlob
-      summary: Check if a blob exists
+      summary: Ollama Check if a blob exists
       description: >-
         Check if a blob with the specified digest exists on the server.
         Returns 200 if it exists, 404 if it does not.
@@ -409,7 +409,7 @@ paths:
           description: Blob not found
     post:
       operationId: createBlob
-      summary: Create a blob
+      summary: Ollama Create a blob
       description: >-
         Create a blob from a file on the server. Used to upload model
         layers or other binary data referenced by digest.
