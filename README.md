@@ -1,13 +1,13 @@
 # Ollama (ollama)
-API for running large language models locally
+API for running large language models locally.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/ollama/refs/heads/main/apis.yml)
 
 ## Scope
 
-- **Type:** Index 
-- **Position:** Consumer 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
 ## Tags:
 
@@ -15,42 +15,49 @@ API for running large language models locally
 
 ## Timestamps
 
-- **Created:** 2025-11-19 
-- **Modified:** 2026-01-04 
+- **Created:** 2025-11-19
+- **Modified:** 2026-04-28
 
 ## APIs
 
-### Ollama
-Ollama is the easiest way to get up and running with large language models such as gpt-oss, Gemma 3, DeepSeek-R1, Qwen3 and more. 
+### Ollama API
+Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses.
 
-**Human URL:** [ https://docs.ollama.com/]( https://docs.ollama.com/)
+- [Documentation](https://docs.ollama.com/api/introduction)
+- [OpenAPI](openapi/ollama-api-openapi.yml)
 
+### Ollama OpenAI Compatibility API
+Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for OpenAI to connect to locally-running models through Ollama.
 
-#### Tags:
+- [Documentation](https://docs.ollama.com/api/openai-compatibility)
+- [OpenAPI](openapi/ollama-openai-compatibility-api-openapi.yml)
 
- - Models, Large Language Models
+### Ollama Anthropic Compatibility API
+Ollama provides compatibility with the Anthropic Messages API, enabling tools like Claude Code to work with locally-running open-source models.
 
-#### Properties
+- [Documentation](https://docs.ollama.com/api/anthropic-compatibility)
 
-- [Documentation]( https://docs.ollama.com/)
+### Ollama Cloud API
+Ollama Cloud provides cloud-hosted inference for large language models, giving access to larger models and faster responses without requiring a powerful local GPU.
+
+- [Documentation](https://docs.ollama.com/cloud)
 
 ## Common Properties
 
 - [Website](https://ollama.com/)
 - [Documentation](https://docs.ollama.com/)
 - [FAQ](https://docs.ollama.com/faq)
-- [Login](https://signin.ollama.com/?client_id=client_01JX0QMHD43PFFCCNXH82A6K8B&redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8)
-- [SignUp](https://signin.ollama.com/sign-up?redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8)
 - [Pricing](https://ollama.com/cloud)
 - [GitHub](https://github.com/ollama/ollama)
 - [Blog](https://ollama.ai/blog)
 - [Models](https://ollama.ai/library)
+- [OpenAPI](https://docs.ollama.com/openapi.yaml)
+- [Python SDK](https://github.com/ollama/ollama-python)
+- [JavaScript SDK](https://github.com/ollama/ollama-js)
+- [Discord](https://discord.gg/ollama)
 
 ## Maintainers
 
 **FN:** Kin Lane
 
-**Email:** info@apievangelist.com
-**FN:** Ollama Team
-
-**Email:** hello@ollama.ai
+**Email:** kin@apievangelist.com

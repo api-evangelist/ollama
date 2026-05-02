@@ -244,7 +244,7 @@ common:
   - url: https://docs.ollama.com/windows
     type: Documentation
 created: '2025-11-19'
-modified: '2026-03-16'
+modified: '2026-04-28'
 position: Consumer
 description: >-
   API for running large language models locally.
