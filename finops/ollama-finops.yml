@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,10 +9,11 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Ollama
 providerId: ollama
-publisherName: Ollama
-serviceCategory: API
+publisherName: Ollama Inc.
+serviceCategory: AI Infrastructure
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Artificial Intelligence
   - Large Language Models
@@ -19,96 +21,77 @@ tags:
   - FinOps
   - Cost Management
   - FOCUS
-description: FinOps framework definition for the Ollama API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: 'FOCUS-aligned FinOps for Ollama: local inference is free and self-hosted; Ollama Cloud is
+  a tiered subscription priced on GPU utilization rather than tokens, with concurrency caps per tier.'
+sources:
+  - https://ollama.com/pricing
+  - https://docs.ollama.com/cloud
+  - https://docs.ollama.com/api/authentication
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: For local Ollama, track GPU/CPU utilization and electricity cost as the unit cost. For
+      Ollama Cloud, track concurrent model count and weekly GPU-time budget on the ollama.com dashboard;
+      Ollama does not charge per token.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Allocate Ollama Cloud subscriptions per developer or team (one Pro/Max per active developer).
+      For self-hosted GPUs, allocate the inference server's amortized hardware + power cost across consuming
+      products by tagged request metadata.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Run common, latency-tolerant inference locally; reserve cloud (Pro/Max) for large models
+      that exceed local VRAM (e.g. gpt-oss:120b-cloud). Right-size the tier — Pro at $20/mo replaces ad-hoc
+      large-model rentals; Max at $100/mo only when sustained 10x concurrency is needed.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+    description: Designate a per-team owner for each Ollama Cloud account. Review weekly cloud GPU-time
+      consumption against the tier; downgrade to Free if Cloud is dormant. For self-hosted, the platform
+      team owns hardware utilization targets.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription (Tiered) + Self-Hosted Free
+  billingFrequency: Monthly or Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
     - Credit
-    - Adjustment
   chargeFrequency: Recurring
 focusColumns:
   ServiceName: Ollama
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: AI Infrastructure
   ProviderName: Ollama
-  PublisherName: Ollama
-  InvoiceIssuerName: Ollama
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Ollama Inc.
+  InvoiceIssuerName: Ollama Inc.
+  PricingCategory: Subscription
+  PricingUnit: month
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
+  - name: cloud_subscription
+    description: Per-account Ollama Cloud subscription (Free, Pro, Max)
+    unit: month
+    aggregation: sum
+    dimensions:
+      - tier
+      - billing_cycle
+  - name: cloud_gpu_time
+    description: GPU time consumed on Ollama Cloud (the actual consumption meter)
+    unit: gpu-second
+    aggregation: sum
+    dimensions:
+      - model
+      - region
+  - name: cloud_concurrent_models
+    description: Peak concurrent cloud model count (used to size tier)
+    unit: model
+    aggregation: max
+    dimensions:
+      - account
+  - name: local_inference_requests
+    description: Local Ollama requests (no charge from Ollama; cost is hardware/power)
     unit: request
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
+      - model
+      - host
 apis:
   - name: Ollama API
     baseURL: http://localhost:11434/api
@@ -116,42 +99,41 @@ apis:
       - Inference
       - Large Language Models
       - Local AI
-      - Models
     serviceName: Ollama API
-    serviceCategory: API
+    serviceCategory: AI Infrastructure
   - name: Ollama OpenAI Compatibility API
     baseURL: http://localhost:11434/v1
     tags:
       - Chat
       - Compatibility
-      - Large Language Models
       - OpenAI
     serviceName: Ollama OpenAI Compatibility API
-    serviceCategory: API
+    serviceCategory: AI Infrastructure
   - name: Ollama Anthropic Compatibility API
     baseURL: http://localhost:11434
     tags:
       - Anthropic
       - Chat
       - Compatibility
-      - Large Language Models
     serviceName: Ollama Anthropic Compatibility API
-    serviceCategory: API
+    serviceCategory: AI Infrastructure
   - name: Ollama Cloud API
     baseURL: https://ollama.com/api
     tags:
       - Cloud
       - Inference
-      - Large Language Models
     serviceName: Ollama Cloud API
-    serviceCategory: API
+    serviceCategory: AI Infrastructure
 unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+  - name: Cloud cost per active developer
+    metric: cloud_subscription_cost / active_developers_using_cloud
+    target: '$20-100/mo per developer based on tier'
+  - name: Local cost per inference
+    metric: (gpu_amortization + electricity) / local_inference_requests
+    target: minimize via batching
+  - name: Cloud GPU-time efficiency
+    metric: cloud_gpu_time / cloud_useful_completions
+    target: monitor weekly against tier ceiling
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

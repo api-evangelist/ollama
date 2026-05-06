@@ -4,99 +4,76 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Ollama
 providerId: ollama
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Artificial Intelligence
   - Large Language Models
   - Models
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Ollama API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Local Ollama (http://localhost:11434) has no rate limits or authentication. Ollama Cloud
+  enforces tier-based concurrency (Free, Pro=3, Max=10 concurrent cloud models) and weekly GPU-time quotas
+  rather than per-second request ceilings. Cloud quotas reset on 5-hour session and 7-day weekly cycles.
+  Specific TPS / RPM ceilings are not publicly documented.
+sources:
+  - https://ollama.com/pricing
+  - https://docs.ollama.com/cloud
+  - https://docs.ollama.com/api/authentication
 responseCodes:
+  unauthorized: 401
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: Local server
+    scope: localhost
+    metric: requests_per_second
+    limit: unlimited (bounded by local hardware)
+    notes: No auth, no rate limiting on http://localhost:11434.
+    applies:
+      - Ollama API
+      - Ollama OpenAI Compatibility API
+      - Ollama Anthropic Compatibility API
+  - name: Cloud — concurrent models (Free)
+    scope: account
+    metric: concurrent_requests
+    limit: 1
+    notes: Free tier permits running cloud models with basic limits.
+    applies:
+      - Ollama Cloud API
+  - name: Cloud — concurrent models (Pro)
+    scope: account
+    metric: concurrent_requests
+    limit: 3
+    notes: Pro tier permits 3 cloud models at a time.
+    applies:
+      - Ollama Cloud API
+  - name: Cloud — concurrent models (Max)
+    scope: account
+    metric: concurrent_requests
     limit: 10
-    burst: 20
-    timeFrame: minute
+    notes: Max tier permits 10 cloud models at a time.
     applies:
-      - Ollama API
-      - Ollama OpenAI Compatibility API
-      - Ollama Anthropic Compatibility API
       - Ollama Cloud API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
+  - name: Cloud — weekly GPU usage
+    scope: account
+    metric: gpu_time
+    limit: tier-dependent (Free baseline, Pro = 50x Free, Max = 5x Pro)
+    timeFrame: week
+    notes: Quota resets on 5-hour session and 7-day weekly windows.
     applies:
-      - Ollama API
-      - Ollama OpenAI Compatibility API
-      - Ollama Anthropic Compatibility API
-      - Ollama Cloud API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Ollama API
-      - Ollama OpenAI Compatibility API
-      - Ollama Anthropic Compatibility API
-      - Ollama Cloud API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Ollama API
-      - Ollama OpenAI Compatibility API
-      - Ollama Anthropic Compatibility API
-      - Ollama Cloud API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Ollama API
-      - Ollama OpenAI Compatibility API
-      - Ollama Anthropic Compatibility API
       - Ollama Cloud API
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Authentication
+    description: Local server requires no auth. Cloud requires an ollama.com account; pass the API key
+      via the OLLAMA_API_KEY env var or Authorization Bearer header.
+  - name: Backoff
+    description: On 429 from cloud, back off and retry; honor Retry-After if present.
+  - name: Privacy
+    description: 'Ollama states cloud prompt/response data is never logged or trained on; cloud inference
+      runs primarily in US data centers, with EU/Singapore routing for capacity.'
+  - name: Hybrid scheduling
+    description: Cloud models can be invoked transparently from a local Ollama instance via signed-in
+      cloud access; routing to localhost vs ollama.com is selected per-request by model name.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
