@@ -1,0 +1,433 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ollama API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation,
+    chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting
+    with models running on the Ollama inference engine at localhost:11434.
+  tags:
+  - Ollama
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: ollama
+    baseUri: http://localhost:11434
+    description: Ollama API HTTP API.
+    resources:
+    - name: api-generate
+      path: /api/generate
+      operations:
+      - name: generatecompletion
+        method: POST
+        description: Ollama Generate a completion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-chat
+      path: /api/chat
+      operations:
+      - name: generatechatcompletion
+        method: POST
+        description: Ollama Generate a chat completion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-embed
+      path: /api/embed
+      operations:
+      - name: generateembeddings
+        method: POST
+        description: Ollama Generate embeddings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-tags
+      path: /api/tags
+      operations:
+      - name: listmodels
+        method: GET
+        description: Ollama List local models
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-show
+      path: /api/show
+      operations:
+      - name: showmodelinfo
+        method: POST
+        description: Ollama Show model information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-create
+      path: /api/create
+      operations:
+      - name: createmodel
+        method: POST
+        description: Ollama Create a model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-copy
+      path: /api/copy
+      operations:
+      - name: copymodel
+        method: POST
+        description: Ollama Copy a model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-pull
+      path: /api/pull
+      operations:
+      - name: pullmodel
+        method: POST
+        description: Ollama Pull a model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-push
+      path: /api/push
+      operations:
+      - name: pushmodel
+        method: POST
+        description: Ollama Push a model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-delete
+      path: /api/delete
+      operations:
+      - name: deletemodel
+        method: DELETE
+        description: Ollama Delete a model
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-ps
+      path: /api/ps
+      operations:
+      - name: listrunningmodels
+        method: GET
+        description: Ollama List running models
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-blobs-digest
+      path: /api/blobs/{digest}
+      operations:
+      - name: createblob
+        method: POST
+        description: Ollama Create a blob
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-version
+      path: /api/version
+      operations:
+      - name: getversion
+        method: GET
+        description: Get Ollama version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: ollama-rest
+    description: REST adapter for Ollama API.
+    resources:
+    - path: /api/generate
+      name: generatecompletion
+      operations:
+      - method: POST
+        name: generatecompletion
+        description: Ollama Generate a completion
+        call: ollama.generatecompletion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/chat
+      name: generatechatcompletion
+      operations:
+      - method: POST
+        name: generatechatcompletion
+        description: Ollama Generate a chat completion
+        call: ollama.generatechatcompletion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/embed
+      name: generateembeddings
+      operations:
+      - method: POST
+        name: generateembeddings
+        description: Ollama Generate embeddings
+        call: ollama.generateembeddings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/tags
+      name: listmodels
+      operations:
+      - method: GET
+        name: listmodels
+        description: Ollama List local models
+        call: ollama.listmodels
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/show
+      name: showmodelinfo
+      operations:
+      - method: POST
+        name: showmodelinfo
+        description: Ollama Show model information
+        call: ollama.showmodelinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/create
+      name: createmodel
+      operations:
+      - method: POST
+        name: createmodel
+        description: Ollama Create a model
+        call: ollama.createmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/copy
+      name: copymodel
+      operations:
+      - method: POST
+        name: copymodel
+        description: Ollama Copy a model
+        call: ollama.copymodel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/pull
+      name: pullmodel
+      operations:
+      - method: POST
+        name: pullmodel
+        description: Ollama Pull a model
+        call: ollama.pullmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/push
+      name: pushmodel
+      operations:
+      - method: POST
+        name: pushmodel
+        description: Ollama Push a model
+        call: ollama.pushmodel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/delete
+      name: deletemodel
+      operations:
+      - method: DELETE
+        name: deletemodel
+        description: Ollama Delete a model
+        call: ollama.deletemodel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/ps
+      name: listrunningmodels
+      operations:
+      - method: GET
+        name: listrunningmodels
+        description: Ollama List running models
+        call: ollama.listrunningmodels
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/blobs/{digest}
+      name: createblob
+      operations:
+      - method: POST
+        name: createblob
+        description: Ollama Create a blob
+        call: ollama.createblob
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/version
+      name: getversion
+      operations:
+      - method: GET
+        name: getversion
+        description: Get Ollama version
+        call: ollama.getversion
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: ollama-mcp
+    transport: http
+    description: MCP adapter for Ollama API for AI agent use.
+    tools:
+    - name: generatecompletion
+      description: Ollama Generate a completion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.generatecompletion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generatechatcompletion
+      description: Ollama Generate a chat completion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.generatechatcompletion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generateembeddings
+      description: Ollama Generate embeddings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.generateembeddings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listmodels
+      description: Ollama List local models
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ollama.listmodels
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: showmodelinfo
+      description: Ollama Show model information
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.showmodelinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createmodel
+      description: Ollama Create a model
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.createmodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: copymodel
+      description: Ollama Copy a model
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.copymodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pullmodel
+      description: Ollama Pull a model
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.pullmodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: pushmodel
+      description: Ollama Push a model
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.pushmodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletemodel
+      description: Ollama Delete a model
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: ollama.deletemodel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listrunningmodels
+      description: Ollama List running models
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ollama.listrunningmodels
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createblob
+      description: Ollama Create a blob
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama.createblob
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getversion
+      description: Get Ollama version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ollama.getversion
+      outputParameters:
+      - type: object
+        mapping: $.
