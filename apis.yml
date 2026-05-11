@@ -248,6 +248,8 @@ modified: '2026-04-28'
 position: Consumer
 description: >-
   API for running large language models locally.
+integrations:
+  - name: Ollama
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
