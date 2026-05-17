@@ -16,7 +16,7 @@ apis:
       - url: https://docs.ollama.com/openapi.yaml
         type: OpenAPI
       - url: https://docs.ollama.com/api/introduction
-        type: Getting Started
+        type: GettingStarted
       - url: https://docs.ollama.com/api/authentication
         type: Authentication
       - url: https://docs.ollama.com/api/generate
@@ -107,7 +107,7 @@ apis:
       - url: https://docs.ollama.com/cloud
         type: Documentation
       - url: https://ollama.com/cloud
-        type: Getting Started
+        type: GettingStarted
       - url: https://ollama.com/pricing
         type: Pricing
       - url: https://ollama.com/settings/keys
@@ -224,11 +224,11 @@ common:
   - url: https://github.com/ollama/ollama-swift
     type: Swift SDK
   - url: https://stackoverflow.com/questions/tagged/ollama
-    type: Stack Overflow
+    type: StackOverflow
   - url: https://www.youtube.com/@Ollama-AI
     type: YouTube
   - url: https://github.com/ollama
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://github.com/ollama/ollama/issues
     type: Issue Tracker
   - url: https://ollama.com/events
