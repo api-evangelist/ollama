@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ollama OpenAI Compatibility API — Chat Completions
+  description: 'Ollama OpenAI Compatibility API — Chat Completions. 1 operations. Lead operation: Ollama Create chat completion.
+    Self-contained Naftiko capability covering one Ollama business surface.'
+  tags:
+  - Ollama
+  - Chat Completions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OLLAMA_API_KEY: OLLAMA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: openai-compatibility-chat-completions
+    baseUri: http://localhost:11434/v1
+    description: Ollama OpenAI Compatibility API — Chat Completions business capability. Self-contained, no shared references.
+    resources:
+    - name: chat-completions
+      path: /chat/completions
+      operations:
+      - name: createchatcompletion
+        method: POST
+        description: Ollama Create chat completion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.OLLAMA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: openai-compatibility-chat-completions-rest
+    port: 8080
+    description: REST adapter for Ollama OpenAI Compatibility API — Chat Completions. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/chat/completions
+      name: chat-completions
+      description: REST surface for chat-completions.
+      operations:
+      - method: POST
+        name: createchatcompletion
+        description: Ollama Create chat completion
+        call: openai-compatibility-chat-completions.createchatcompletion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: openai-compatibility-chat-completions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ollama OpenAI Compatibility API — Chat Completions. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: ollama-create-chat-completion
+      description: Ollama Create chat completion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: openai-compatibility-chat-completions.createchatcompletion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

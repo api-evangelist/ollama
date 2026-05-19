@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ollama API — Chat
+  description: 'Ollama API — Chat. 1 operations. Lead operation: Ollama Generate a chat completion. Self-contained Naftiko
+    capability covering one Ollama business surface.'
+  tags:
+  - Ollama
+  - Chat
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OLLAMA_API_KEY: OLLAMA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ollama-chat
+    baseUri: http://localhost:11434
+    description: Ollama API — Chat business capability. Self-contained, no shared references.
+    resources:
+    - name: api-chat
+      path: /api/chat
+      operations:
+      - name: generatechatcompletion
+        method: POST
+        description: Ollama Generate a chat completion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: ollama-chat-rest
+    port: 8080
+    description: REST adapter for Ollama API — Chat. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/chat
+      name: api-chat
+      description: REST surface for api-chat.
+      operations:
+      - method: POST
+        name: generatechatcompletion
+        description: Ollama Generate a chat completion
+        call: ollama-chat.generatechatcompletion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ollama-chat-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ollama API — Chat. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: ollama-generate-chat-completion
+      description: Ollama Generate a chat completion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama-chat.generatechatcompletion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

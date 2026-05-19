@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ollama OpenAI Compatibility API — Images
+  description: 'Ollama OpenAI Compatibility API — Images. 1 operations. Lead operation: Ollama Create image. Self-contained
+    Naftiko capability covering one Ollama business surface.'
+  tags:
+  - Ollama
+  - Images
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OLLAMA_API_KEY: OLLAMA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: openai-compatibility-images
+    baseUri: http://localhost:11434/v1
+    description: Ollama OpenAI Compatibility API — Images business capability. Self-contained, no shared references.
+    resources:
+    - name: images-generations
+      path: /images/generations
+      operations:
+      - name: createimage
+        method: POST
+        description: Ollama Create image
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.OLLAMA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: openai-compatibility-images-rest
+    port: 8080
+    description: REST adapter for Ollama OpenAI Compatibility API — Images. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/images/generations
+      name: images-generations
+      description: REST surface for images-generations.
+      operations:
+      - method: POST
+        name: createimage
+        description: Ollama Create image
+        call: openai-compatibility-images.createimage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: openai-compatibility-images-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ollama OpenAI Compatibility API — Images. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: ollama-create-image
+      description: Ollama Create image
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: openai-compatibility-images.createimage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

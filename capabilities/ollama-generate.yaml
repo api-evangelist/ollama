@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Ollama API — Generate
+  description: 'Ollama API — Generate. 1 operations. Lead operation: Ollama Generate a completion. Self-contained Naftiko
+    capability covering one Ollama business surface.'
+  tags:
+  - Ollama
+  - Generate
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OLLAMA_API_KEY: OLLAMA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ollama-generate
+    baseUri: http://localhost:11434
+    description: Ollama API — Generate business capability. Self-contained, no shared references.
+    resources:
+    - name: api-generate
+      path: /api/generate
+      operations:
+      - name: generatecompletion
+        method: POST
+        description: Ollama Generate a completion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: ollama-generate-rest
+    port: 8080
+    description: REST adapter for Ollama API — Generate. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/generate
+      name: api-generate
+      description: REST surface for api-generate.
+      operations:
+      - method: POST
+        name: generatecompletion
+        description: Ollama Generate a completion
+        call: ollama-generate.generatecompletion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ollama-generate-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Ollama API — Generate. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: ollama-generate-completion
+      description: Ollama Generate a completion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ollama-generate.generatecompletion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
