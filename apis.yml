@@ -94,6 +94,9 @@ apis:
     type: Documentation
   - url: https://ollama.com/blog/openai-compatibility
     type: Blog
+  - url: https://ollama.com/blog/rss.xml
+    type: BlogRSS
+    description: Discovered RSS/Atom feed for https://ollama.com/blog
   description: Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for OpenAI
     to connect to locally-running models through Ollama. Supported endpoints include chat completions, completions, embeddings,
     models, and the Responses API.

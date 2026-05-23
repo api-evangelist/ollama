@@ -1,33 +1,6 @@
 {
   "repo": "ollama",
-  "feeds": [
-    {
-      "source": "https://ollama.ai/blog",
-      "feed_url": "https://ollama.ai/blog/rss.xml",
-      "title": "Ollama",
-      "saved": 38
-    },
-    {
-      "source": "https://ollama.com/blog",
-      "feed_url": "https://ollama.com/blog/rss.xml",
-      "title": "Ollama",
-      "saved": 0
-    },
-    {
-      "source": "https://ollama.com/blog/openai-compatibility",
-      "feed_url": "",
-      "title": "",
-      "saved": 0,
-      "error": "no_feed"
-    },
-    {
-      "source": "https://ollama.com/blog/claude",
-      "feed_url": "",
-      "title": "",
-      "saved": 0,
-      "error": "no_feed"
-    }
-  ],
+  "feeds": [],
   "post_count": 48,
   "fetched": "2026-05-17T20:48:52Z"
 }
