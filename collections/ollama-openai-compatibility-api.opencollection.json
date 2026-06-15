@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama OpenAI Compatibility API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat Completions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Create chat completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a model response for the given chat conversation. Supports streaming, JSON mode, structured output, vision, and tool calling. Compatible with the OpenAI Chat Completions API format."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Completions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Create completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/v1/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a completion for the provided prompt. Compatible with the OpenAI Completions API format. Supports streaming, JSON mode, and reproducible outputs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Embeddings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Create embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/v1/embeddings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an embedding vector representing the input text. Compatible with the OpenAI Embeddings API format."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama List models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:11434/v1/models"
+          },
+          "docs": "Lists the currently available models and provides basic information about each one. Compatible with the OpenAI List Models API format."
+        },
+        {
+          "info": {
+            "name": "Ollama Retrieve a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:11434/v1/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the model to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves a model instance, providing basic information about the model. Compatible with the OpenAI Retrieve Model API format."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Create image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/v1/images/generations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an image given a text prompt. This is an experimental endpoint that may change or be removed. Only supports b64_json response format."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Create response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/v1/responses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a structured response with optional reasoning. Supports streaming, tool calling, and reasoning summaries. Compatible with the OpenAI Responses API format. Added in Ollama v0.13.3."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
