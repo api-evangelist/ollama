@@ -146,7 +146,7 @@ common:
   - url: >-
       https://signin.ollama.com/sign-up?redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8
     name: Sign up
-    type: SignUp
+    type: Signup
     description: 'null'
   - url: https://ollama.com/cloud
     name: Cloud  Ollama
