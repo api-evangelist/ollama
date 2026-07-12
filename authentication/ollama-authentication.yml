@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/ollama-openai-compatibility-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: API key authentication. The key is accepted but not validated by Ollama. Use
+    any value such as ollama.
+  sources:
+  - openapi/ollama-openai-compatibility-api-openapi.yml

@@ -126,6 +126,10 @@ type: Index
 image: https://ollama.ai/public/ollama.png
 access: 3rd-Party
 common:
+  - type: DomainSecurity
+    url: security/ollama-domain-security.yml
+  - type: Authentication
+    url: authentication/ollama-authentication.yml
   - url: https://ollama.com/
     name: Ollama
     type: Website
