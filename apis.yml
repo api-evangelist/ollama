@@ -126,6 +126,8 @@ type: Index
 image: https://ollama.ai/public/ollama.png
 access: 3rd-Party
 common:
+  - type: AgenticAccess
+    url: agentic-access/ollama-agentic-access.yml
   - type: DomainSecurity
     url: security/ollama-domain-security.yml
   - type: Authentication
