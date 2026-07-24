@@ -1,0 +1,85 @@
+openapi: 3.1.0
+info:
+  title: Ollama Blobs Images API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  version: 0.1.0
+  contact:
+    name: Ollama Team
+    url: https://ollama.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://ollama.com/terms
+servers:
+- url: http://localhost:11434
+  description: Local Ollama Server
+tags:
+- name: Images
+  description: Generate images from text descriptions using the OpenAI-compatible images endpoint. Experimental feature.
+paths:
+  /images/generations:
+    post:
+      operationId: createImage
+      summary: Ollama Create image
+      description: Creates an image given a text prompt. This is an experimental endpoint that may change or be removed. Only supports b64_json response format.
+      tags:
+      - Images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageGenerationRequest'
+      responses:
+        '200':
+          description: Successful image generation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageGenerationResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Model not found
+components:
+  schemas:
+    ImageGenerationResponse:
+      type: object
+      description: Response object from an image generation request.
+      properties:
+        created:
+          type: integer
+          description: Unix timestamp of when the image was created.
+        data:
+          type: array
+          description: The generated image data.
+          items:
+            type: object
+            properties:
+              b64_json:
+                type: string
+                description: The base64-encoded image data.
+    ImageGenerationRequest:
+      type: object
+      description: Request body for generating images in OpenAI-compatible format. This is an experimental endpoint.
+      required:
+      - model
+      - prompt
+      properties:
+        model:
+          type: string
+          description: The model to use for image generation.
+        prompt:
+          type: string
+          description: A text description of the desired image.
+        size:
+          type: string
+          description: The size of the generated image, such as 1024x1024.
+        response_format:
+          type: string
+          description: The format in which the image is returned. Only b64_json is supported.
+          enum:
+          - b64_json
+externalDocs:
+  description: Ollama API Documentation
+  url: https://docs.ollama.com/api/introduction

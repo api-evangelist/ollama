@@ -1,0 +1,198 @@
+openapi: 3.1.0
+info:
+  title: Ollama Blobs Completions API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  version: 0.1.0
+  contact:
+    name: Ollama Team
+    url: https://ollama.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://ollama.com/terms
+servers:
+- url: http://localhost:11434
+  description: Local Ollama Server
+tags:
+- name: Completions
+  description: Generate text completions using the OpenAI-compatible completions endpoint.
+paths:
+  /completions:
+    post:
+      operationId: createCompletion
+      summary: Ollama Create completion
+      description: Creates a completion for the provided prompt. Compatible with the OpenAI Completions API format. Supports streaming, JSON mode, and reproducible outputs.
+      tags:
+      - Completions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionRequest'
+      responses:
+        '200':
+          description: Successful completion response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompletionResponse'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/CompletionStreamResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Model not found
+components:
+  schemas:
+    CompletionStreamResponse:
+      type: object
+      description: A streaming text completion chunk.
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the completion.
+        object:
+          type: string
+          description: The object type.
+        created:
+          type: integer
+          description: Unix timestamp of creation.
+        model:
+          type: string
+          description: The model used.
+        choices:
+          type: array
+          description: A list of completion chunk choices.
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+                description: The index of the choice.
+              text:
+                type: string
+                description: The text delta.
+              finish_reason:
+                type:
+                - string
+                - 'null'
+                description: The finish reason, if applicable.
+    CompletionResponse:
+      type: object
+      description: Response object from a text completion request.
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the completion.
+        object:
+          type: string
+          description: The object type, always text_completion.
+          const: text_completion
+        created:
+          type: integer
+          description: Unix timestamp of when the completion was created.
+        model:
+          type: string
+          description: The model used for the completion.
+        choices:
+          type: array
+          description: A list of completion choices.
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+                description: The index of the choice.
+              text:
+                type: string
+                description: The generated text.
+              finish_reason:
+                type: string
+                description: The reason the model stopped generating.
+                enum:
+                - stop
+                - length
+        usage:
+          $ref: '#/components/schemas/UsageStats'
+    UsageStats:
+      type: object
+      description: Token usage statistics for the request.
+      properties:
+        prompt_tokens:
+          type: integer
+          description: Number of tokens in the prompt.
+        completion_tokens:
+          type: integer
+          description: Number of tokens in the generated completion.
+        total_tokens:
+          type: integer
+          description: Total number of tokens used in the request.
+    CompletionRequest:
+      type: object
+      description: Request body for creating a text completion in OpenAI-compatible format.
+      required:
+      - model
+      - prompt
+      properties:
+        model:
+          type: string
+          description: The model to use for completion.
+        prompt:
+          description: The prompt to generate completions for.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        temperature:
+          type: number
+          description: Sampling temperature between 0 and 2.
+          minimum: 0.0
+          maximum: 2.0
+        top_p:
+          type: number
+          description: Nucleus sampling parameter.
+          minimum: 0.0
+          maximum: 1.0
+        max_tokens:
+          type: integer
+          description: Maximum number of tokens to generate.
+        frequency_penalty:
+          type: number
+          description: Penalty for token frequency.
+          minimum: -2.0
+          maximum: 2.0
+        presence_penalty:
+          type: number
+          description: Penalty for token presence.
+          minimum: -2.0
+          maximum: 2.0
+        seed:
+          type: integer
+          description: Random seed for deterministic generation.
+        stop:
+          description: Stop sequences for generation.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        stream:
+          type: boolean
+          description: Whether to stream back partial progress.
+          default: false
+        stream_options:
+          type: object
+          description: Options for streaming responses.
+          properties:
+            include_usage:
+              type: boolean
+              description: If true, includes usage info in the stream.
+        suffix:
+          type: string
+          description: The suffix that comes after the completion.
+externalDocs:
+  description: Ollama API Documentation
+  url: https://docs.ollama.com/api/introduction

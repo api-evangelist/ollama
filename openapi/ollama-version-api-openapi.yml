@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  title: Ollama Blobs Version API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  version: 0.1.0
+  contact:
+    name: Ollama Team
+    url: https://ollama.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://ollama.com/terms
+servers:
+- url: http://localhost:11434
+  description: Local Ollama Server
+tags:
+- name: Version
+  description: Retrieve the Ollama server version.
+paths:
+  /api/version:
+    get:
+      operationId: getVersion
+      summary: Get Ollama version
+      description: Returns the version of the Ollama server.
+      tags:
+      - Version
+      responses:
+        '200':
+          description: Successful response with version string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionResponse'
+components:
+  schemas:
+    VersionResponse:
+      type: object
+      description: Response containing the Ollama server version.
+      properties:
+        version:
+          type: string
+          description: The version string of the Ollama server.
+externalDocs:
+  description: Ollama API Documentation
+  url: https://docs.ollama.com/api/introduction

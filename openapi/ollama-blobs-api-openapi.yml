@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Ollama Blobs API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  version: 0.1.0
+  contact:
+    name: Ollama Team
+    url: https://ollama.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://ollama.com/terms
+servers:
+- url: http://localhost:11434
+  description: Local Ollama Server
+tags:
+- name: Blobs
+  description: Manage binary large objects used by models.
+paths:
+  /api/blobs/{digest}:
+    head:
+      operationId: checkBlob
+      summary: Ollama Check if a blob exists
+      description: Check if a blob with the specified digest exists on the server. Returns 200 if it exists, 404 if it does not.
+      tags:
+      - Blobs
+      parameters:
+      - $ref: '#/components/parameters/BlobDigest'
+      responses:
+        '200':
+          description: Blob exists
+        '404':
+          description: Blob not found
+    post:
+      operationId: createBlob
+      summary: Ollama Create a blob
+      description: Create a blob from a file on the server. Used to upload model layers or other binary data referenced by digest.
+      tags:
+      - Blobs
+      parameters:
+      - $ref: '#/components/parameters/BlobDigest'
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Blob created successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  parameters:
+    BlobDigest:
+      name: digest
+      in: path
+      required: true
+      description: The SHA256 digest of the blob in the format sha256:<hex>.
+      schema:
+        type: string
+        pattern: ^sha256:[a-f0-9]{64}$
+  schemas:
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
+externalDocs:
+  description: Ollama API Documentation
+  url: https://docs.ollama.com/api/introduction

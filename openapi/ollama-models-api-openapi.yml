@@ -1,0 +1,540 @@
+openapi: 3.1.0
+info:
+  title: Ollama Blobs Models API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  version: 0.1.0
+  contact:
+    name: Ollama Team
+    url: https://ollama.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://ollama.com/terms
+servers:
+- url: http://localhost:11434
+  description: Local Ollama Server
+tags:
+- name: Models
+  description: List, show, create, copy, pull, push, and delete models.
+paths:
+  /api/tags:
+    get:
+      operationId: listModels
+      summary: Ollama List local models
+      description: List all models that are available locally on the Ollama server, including their size, digest, and metadata details.
+      tags:
+      - Models
+      responses:
+        '200':
+          description: Successful response with list of models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponse'
+  /api/show:
+    post:
+      operationId: showModelInfo
+      summary: Ollama Show model information
+      description: Show detailed information about a model including parameters, template, license, system prompt, capabilities, and model metadata.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShowRequest'
+      responses:
+        '200':
+          description: Successful response with model details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowResponse'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/create:
+    post:
+      operationId: createModel
+      summary: Ollama Create a model
+      description: Create a model from an existing model with optional customizations including system prompt, template, parameters, and quantization. Streams progress updates by default.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRequest'
+      responses:
+        '200':
+          description: Model creation progress. Returns a stream of status events when streaming is enabled, or a single status response when disabled.
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/StatusEvent'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/copy:
+    post:
+      operationId: copyModel
+      summary: Ollama Copy a model
+      description: Create a copy of an existing model under a new name. This creates a duplicate that can be modified independently.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyRequest'
+      responses:
+        '200':
+          description: Model successfully copied
+        '404':
+          description: Source model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/pull:
+    post:
+      operationId: pullModel
+      summary: Ollama Pull a model
+      description: Download a model from the Ollama model registry. Streams progress updates by default with status, digest, and byte transfer information.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PullRequest'
+      responses:
+        '200':
+          description: Model download progress. Returns a stream of status events when streaming is enabled, or a single status response when disabled.
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/StatusEvent'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/push:
+    post:
+      operationId: pushModel
+      summary: Ollama Push a model
+      description: Upload a model to the Ollama model registry for sharing. Requires authentication. Streams progress updates by default.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushRequest'
+      responses:
+        '200':
+          description: Model upload progress. Returns a stream of status events when streaming is enabled, or a single status response when disabled.
+          content:
+            application/x-ndjson:
+              schema:
+                $ref: '#/components/schemas/StatusEvent'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/delete:
+    delete:
+      operationId: deleteModel
+      summary: Ollama Delete a model
+      description: Delete a model and its data from the local Ollama server. This permanently removes the model files from disk.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Model successfully deleted
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /models:
+    get:
+      operationId: listModels
+      summary: Ollama List models
+      description: Lists the currently available models and provides basic information about each one. Compatible with the OpenAI List Models API format.
+      tags:
+      - Models
+      responses:
+        '200':
+          description: Successful response with list of models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelListResponse'
+  /models/{model}:
+    get:
+      operationId: retrieveModel
+      summary: Ollama Retrieve a model
+      description: Retrieves a model instance, providing basic information about the model. Compatible with the OpenAI Retrieve Model API format.
+      tags:
+      - Models
+      parameters:
+      - name: model
+        in: path
+        required: true
+        description: The identifier of the model to retrieve.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response with model information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelObject'
+        '404':
+          description: Model not found
+components:
+  schemas:
+    DeleteRequest:
+      type: object
+      description: Request body for deleting a model from the local server.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to delete.
+    ShowResponse:
+      type: object
+      description: Detailed information about a model including its configuration, capabilities, and metadata.
+      properties:
+        modelfile:
+          type: string
+          description: The Modelfile content used to create this model.
+        parameters:
+          type: string
+          description: The model parameters in string format.
+        template:
+          type: string
+          description: The prompt template used by the model.
+        system:
+          type: string
+          description: The system prompt embedded in the model.
+        license:
+          type: string
+          description: The license text for the model.
+        details:
+          $ref: '#/components/schemas/ModelDetails'
+        model_info:
+          type: object
+          description: Additional model metadata and architecture information.
+          additionalProperties: true
+        capabilities:
+          type: array
+          description: The list of capabilities the model supports, such as completion, tools, vision, and thinking.
+          items:
+            type: string
+    ChatMessage:
+      type: object
+      description: A message in a chat conversation, containing a role, content, and optional images or tool calls.
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          description: The role of the message sender.
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+          description: The text content of the message.
+        thinking:
+          type: string
+          description: The thinking content when extended thinking is enabled.
+        images:
+          type: array
+          description: A list of base64-encoded images attached to the message for multimodal models.
+          items:
+            type: string
+            format: byte
+        tool_calls:
+          type: array
+          description: Tool calls requested by the assistant for function calling.
+          items:
+            $ref: '#/components/schemas/ToolCall'
+    StatusEvent:
+      type: object
+      description: A streaming status event returned during model creation, pull, or push operations.
+      properties:
+        status:
+          type: string
+          description: A human-readable status message describing the current operation step.
+        digest:
+          type: string
+          description: The content digest associated with the current status, if applicable.
+        total:
+          type: integer
+          description: The total number of bytes expected for the operation.
+        completed:
+          type: integer
+          description: The number of bytes transferred so far.
+    ModelSummary:
+      type: object
+      description: Summary information about a locally available model.
+      properties:
+        name:
+          type: string
+          description: The model name identifier.
+        model:
+          type: string
+          description: The model identifier.
+        remote_model:
+          type: string
+          description: The upstream model name if the model is a remote reference.
+        remote_host:
+          type: string
+          description: The upstream Ollama server URL if the model is remote.
+        modified_at:
+          type: string
+          format: date-time
+          description: The ISO 8601 timestamp when the model was last modified.
+        size:
+          type: integer
+          description: The model size in bytes on disk.
+        digest:
+          type: string
+          description: The SHA256 hash of the model contents.
+        details:
+          $ref: '#/components/schemas/ModelDetails'
+    ListResponse:
+      type: object
+      description: Response containing a list of all locally available models.
+      properties:
+        models:
+          type: array
+          description: The list of available models.
+          items:
+            $ref: '#/components/schemas/ModelSummary'
+    CreateRequest:
+      type: object
+      description: Request body for creating a new model from an existing model with optional customizations.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name for the new model to create.
+        from:
+          type: string
+          description: The existing model to use as a base for the new model.
+        system:
+          type: string
+          description: A system prompt to embed in the new model.
+        template:
+          type: string
+          description: A custom prompt template for the new model.
+        license:
+          description: License text or list of licenses for the new model.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        parameters:
+          type: object
+          description: Key-value parameters to set on the new model, such as temperature, top_k, and num_ctx.
+          additionalProperties: true
+        messages:
+          type: array
+          description: A message history to include with the new model.
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        quantize:
+          type: string
+          description: The quantization level to apply to the model, such as q4_K_M or q8_0.
+        stream:
+          type: boolean
+          description: When true, streams progress status events during creation.
+          default: true
+    PushRequest:
+      type: object
+      description: Request body for uploading a model to the registry.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to upload to the registry.
+        stream:
+          type: boolean
+          description: When true, streams progress status events during upload.
+          default: true
+        insecure:
+          type: boolean
+          description: When true, allows uploading to registries using insecure HTTP connections.
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
+    StatusResponse:
+      type: object
+      description: A status response returned for non-streaming model operations.
+      properties:
+        status:
+          type: string
+          description: The current status message.
+    ModelObject:
+      type: object
+      description: Information about a model in OpenAI-compatible format.
+      properties:
+        id:
+          type: string
+          description: The model identifier.
+        object:
+          type: string
+          description: The object type, always model.
+          const: model
+        created:
+          type: integer
+          description: Unix timestamp when the model was last modified.
+        owned_by:
+          type: string
+          description: The organization that owns the model. Defaults to library.
+    ModelListResponse:
+      type: object
+      description: Response containing a list of available models in OpenAI format.
+      properties:
+        object:
+          type: string
+          description: The object type, always list.
+          const: list
+        data:
+          type: array
+          description: The list of model objects.
+          items:
+            $ref: '#/components/schemas/ModelObject'
+    PullRequest:
+      type: object
+      description: Request body for downloading a model from the registry.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to download from the registry.
+        stream:
+          type: boolean
+          description: When true, streams progress status events during download.
+          default: true
+        insecure:
+          type: boolean
+          description: When true, allows downloading from registries using insecure HTTP connections.
+    ShowRequest:
+      type: object
+      description: Request body for retrieving detailed model information.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to show information for.
+        verbose:
+          type: boolean
+          description: When true, returns additional verbose metadata fields.
+    ToolCall:
+      type: object
+      description: A tool call requested by the model during function calling.
+      properties:
+        function:
+          type: object
+          description: The function to call with its name and arguments.
+          properties:
+            name:
+              type: string
+              description: The name of the function to call.
+            arguments:
+              type: object
+              description: The arguments to pass to the function as key-value pairs.
+              additionalProperties: true
+    CopyRequest:
+      type: object
+      description: Request body for copying an existing model to a new name.
+      required:
+      - source
+      - destination
+      properties:
+        source:
+          type: string
+          description: The name of the existing model to copy from.
+        destination:
+          type: string
+          description: The name for the new model copy.
+    ModelDetails:
+      type: object
+      description: Detailed metadata about a model's format and architecture.
+      properties:
+        format:
+          type: string
+          description: The file format of the model, such as gguf.
+        family:
+          type: string
+          description: The primary model family, such as llama or gemma.
+        families:
+          type: array
+          description: All model families this model belongs to.
+          items:
+            type: string
+        parameter_size:
+          type: string
+          description: The parameter count label, such as 7B or 13B.
+        quantization_level:
+          type: string
+          description: The quantization method used, such as Q4_0 or Q4_K_M.
+externalDocs:
+  description: Ollama API Documentation
+  url: https://docs.ollama.com/api/introduction

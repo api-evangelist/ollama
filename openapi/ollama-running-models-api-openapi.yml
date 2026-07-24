@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: Ollama Blobs Running Models API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  version: 0.1.0
+  contact:
+    name: Ollama Team
+    url: https://ollama.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://ollama.com/terms
+servers:
+- url: http://localhost:11434
+  description: Local Ollama Server
+tags:
+- name: Running Models
+  description: View models currently loaded in memory and their resource usage.
+paths:
+  /api/ps:
+    get:
+      operationId: listRunningModels
+      summary: Ollama List running models
+      description: List models that are currently loaded into memory on the Ollama server, including their VRAM usage, context length, and expiration time.
+      tags:
+      - Running Models
+      responses:
+        '200':
+          description: Successful response with list of running models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PsResponse'
+components:
+  schemas:
+    PsResponse:
+      type: object
+      description: Response containing a list of models currently loaded in memory.
+      properties:
+        models:
+          type: array
+          description: The list of currently running models.
+          items:
+            $ref: '#/components/schemas/RunningModel'
+    ModelDetails:
+      type: object
+      description: Detailed metadata about a model's format and architecture.
+      properties:
+        format:
+          type: string
+          description: The file format of the model, such as gguf.
+        family:
+          type: string
+          description: The primary model family, such as llama or gemma.
+        families:
+          type: array
+          description: All model families this model belongs to.
+          items:
+            type: string
+        parameter_size:
+          type: string
+          description: The parameter count label, such as 7B or 13B.
+        quantization_level:
+          type: string
+          description: The quantization method used, such as Q4_0 or Q4_K_M.
+    RunningModel:
+      type: object
+      description: Information about a model currently loaded in memory.
+      properties:
+        name:
+          type: string
+          description: The model name identifier.
+        model:
+          type: string
+          description: The model identifier.
+        size:
+          type: integer
+          description: The model size in bytes.
+        digest:
+          type: string
+          description: The SHA256 hash of the model contents.
+        details:
+          $ref: '#/components/schemas/ModelDetails'
+        expires_at:
+          type: string
+          format: date-time
+          description: The timestamp when the model will be unloaded from memory.
+        size_vram:
+          type: integer
+          description: The amount of VRAM consumed by the model in bytes.
+        context_length:
+          type: integer
+          description: The maximum context window length supported.
+externalDocs:
+  description: Ollama API Documentation
+  url: https://docs.ollama.com/api/introduction

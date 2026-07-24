@@ -1,0 +1,270 @@
+openapi: 3.1.0
+info:
+  title: Ollama Blobs Embeddings API
+  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  version: 0.1.0
+  contact:
+    name: Ollama Team
+    url: https://ollama.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: https://ollama.com/terms
+servers:
+- url: http://localhost:11434
+  description: Local Ollama Server
+tags:
+- name: Embeddings
+  description: Generate vector embeddings from text input.
+paths:
+  /api/embed:
+    post:
+      operationId: generateEmbeddings
+      summary: Ollama Generate embeddings
+      description: Generate vector embeddings from a model for a given text input or array of text inputs. Useful for semantic search, clustering, and retrieval augmented generation.
+      tags:
+      - Embeddings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbedRequest'
+      responses:
+        '200':
+          description: Successful embeddings response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbedResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Model not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /embeddings:
+    post:
+      operationId: createEmbedding
+      summary: Ollama Create embeddings
+      description: Creates an embedding vector representing the input text. Compatible with the OpenAI Embeddings API format.
+      tags:
+      - Embeddings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddingRequest'
+      responses:
+        '200':
+          description: Successful embedding response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddingResponse'
+        '400':
+          description: Bad Request
+        '404':
+          description: Model not found
+components:
+  schemas:
+    EmbedRequest:
+      type: object
+      description: Request body for generating vector embeddings from text.
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          description: The name of the model to use for embedding generation.
+        input:
+          description: The text to generate embeddings for. Can be a single string or an array of strings for batch processing.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        truncate:
+          type: boolean
+          description: If true, truncates inputs that exceed the model's context window. If false, returns an error for oversized inputs.
+          default: true
+        dimensions:
+          type: integer
+          description: The number of dimensions for the output embeddings. Only supported by models that allow dimension reduction.
+        keep_alive:
+          description: How long the model stays loaded in memory after the request.
+          oneOf:
+          - type: string
+          - type: number
+        options:
+          $ref: '#/components/schemas/ModelOptions'
+    EmbeddingRequest:
+      type: object
+      description: Request body for creating embeddings in OpenAI-compatible format.
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          description: The model to use for embedding generation.
+        input:
+          description: Input text to embed. Can be a string or array of strings.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        encoding_format:
+          type: string
+          description: The format of the returned embeddings.
+          enum:
+          - float
+          - base64
+        dimensions:
+          type: integer
+          description: The number of dimensions for the output embeddings.
+    EmbeddingResponse:
+      type: object
+      description: Response object from an embedding request.
+      properties:
+        object:
+          type: string
+          description: The object type, always list.
+          const: list
+        data:
+          type: array
+          description: The list of embedding objects.
+          items:
+            type: object
+            properties:
+              object:
+                type: string
+                description: The object type, always embedding.
+                const: embedding
+              index:
+                type: integer
+                description: The index of the embedding in the list.
+              embedding:
+                type: array
+                description: The embedding vector.
+                items:
+                  type: number
+        model:
+          type: string
+          description: The model used to generate the embeddings.
+        usage:
+          $ref: '#/components/schemas/UsageStats'
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
+    UsageStats:
+      type: object
+      description: Token usage statistics for the request.
+      properties:
+        prompt_tokens:
+          type: integer
+          description: Number of tokens in the prompt.
+        completion_tokens:
+          type: integer
+          description: Number of tokens in the generated completion.
+        total_tokens:
+          type: integer
+          description: Total number of tokens used in the request.
+    ModelOptions:
+      type: object
+      description: Runtime options that control text generation behavior. These override the model's default parameter values.
+      properties:
+        seed:
+          type: integer
+          description: Random seed for reproducible generation. Set to a specific value for deterministic output.
+        temperature:
+          type: number
+          description: Controls the creativity of responses. Higher values produce more varied output. Range 0.0 to 2.0.
+          minimum: 0.0
+          maximum: 2.0
+        top_k:
+          type: integer
+          description: Limits token selection to the top K most probable tokens. Lower values produce more focused output.
+          minimum: 0
+        top_p:
+          type: number
+          description: Nucleus sampling probability cutoff. Limits selection to the smallest set of tokens whose cumulative probability exceeds this value.
+          minimum: 0.0
+          maximum: 1.0
+        min_p:
+          type: number
+          description: Minimum probability threshold relative to the most likely token. Tokens below this threshold are filtered out.
+          minimum: 0.0
+          maximum: 1.0
+        stop:
+          type: array
+          description: A list of stop sequences. Generation halts when any of these strings are produced.
+          items:
+            type: string
+        num_ctx:
+          type: integer
+          description: The maximum context window size in tokens.
+        num_predict:
+          type: integer
+          description: The maximum number of tokens to generate in the response.
+        repeat_penalty:
+          type: number
+          description: Penalty applied to repeated tokens to reduce repetition.
+        repeat_last_n:
+          type: integer
+          description: Number of recent tokens to consider for repeat penalty.
+        tfs_z:
+          type: number
+          description: Tail-free sampling parameter. Higher values reduce the impact of less probable tokens.
+        mirostat:
+          type: integer
+          description: Enable Mirostat sampling for perplexity control. 0 is disabled, 1 uses Mirostat, 2 uses Mirostat 2.0.
+          enum:
+          - 0
+          - 1
+          - 2
+        mirostat_tau:
+          type: number
+          description: Target entropy for Mirostat sampling.
+        mirostat_eta:
+          type: number
+          description: Learning rate for Mirostat sampling.
+    EmbedResponse:
+      type: object
+      description: Response object from an embedding generation request containing the computed vectors.
+      properties:
+        model:
+          type: string
+          description: The model that produced the embeddings.
+        embeddings:
+          type: array
+          description: The array of embedding vectors, one per input text.
+          items:
+            type: array
+            items:
+              type: number
+        total_duration:
+          type: integer
+          description: Total time spent generating embeddings in nanoseconds.
+        load_duration:
+          type: integer
+          description: Time spent loading the model in nanoseconds.
+        prompt_eval_count:
+          type: integer
+          description: Number of input tokens processed to generate the embeddings.
+externalDocs:
+  description: Ollama API Documentation
+  url: https://docs.ollama.com/api/introduction
