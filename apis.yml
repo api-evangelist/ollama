@@ -1,128 +1,619 @@
 aid: ollama
 url: https://raw.githubusercontent.com/api-evangelist/ollama/refs/heads/main/apis.yml
 apis:
-  - aid: ollama:ollama-api
-    name: Ollama API
-    tags:
-      - Inference
-      - Large Language Models
-      - Local AI
-      - Models
-    humanURL: https://docs.ollama.com/api/introduction
-    baseURL: http://localhost:11434/api
-    properties:
-      - url: https://docs.ollama.com/
-        type: Documentation
-      - url: https://docs.ollama.com/openapi.yaml
-        type: OpenAPI
-      - url: https://docs.ollama.com/api/introduction
-        type: GettingStarted
-      - url: https://docs.ollama.com/api/authentication
-        type: Authentication
-      - url: https://docs.ollama.com/api/generate
-        type: Documentation
-      - url: https://docs.ollama.com/api/chat
-        type: Documentation
-      - url: https://docs.ollama.com/api/embed
-        type: Documentation
-      - url: https://docs.ollama.com/api/tags
-        type: Documentation
-      - url: https://docs.ollama.com/api/ps
-        type: Documentation
-      - url: https://docs.ollama.com/api/create
-        type: Documentation
-      - url: https://docs.ollama.com/api/pull
-        type: Documentation
-      - url: https://docs.ollama.com/api/push
-        type: Documentation
-      - url: https://docs.ollama.com/api/copy
-        type: Documentation
-      - url: https://docs.ollama.com/api/delete
-        type: Documentation
-      - url: https://docs.ollama.com/api/show
-        type: Documentation
-      - url: https://docs.ollama.com/api/streaming
-        type: Documentation
-      - url: https://docs.ollama.com/api/errors
-        type: Documentation
-      - url: https://docs.ollama.com/api/usage
-        type: Documentation
-      - url: https://docs.ollama.com/api/blobs
-        type: Documentation
-      - url: https://docs.ollama.com/api/version
-        type: Documentation
-    description: >-
-      Ollama provides a REST API for running and managing large language models locally. The API supports text
-      generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary
-      interface for interacting with models running on the Ollama inference engine at localhost:11434.
-  - aid: ollama:ollama-openai-compatibility-api
-    name: Ollama OpenAI Compatibility API
-    tags:
-      - Chat
-      - Compatibility
-      - Large Language Models
-      - OpenAI
-    humanURL: https://docs.ollama.com/api/openai-compatibility
-    baseURL: http://localhost:11434/v1
-    properties:
-      - url: https://docs.ollama.com/api/openai-compatibility
-        type: Documentation
-      - url: https://ollama.com/blog/openai-compatibility
-        type: Blog
-      - url: https://ollama.com/blog/rss.xml
-        type: BlogRSS
-        description: Discovered RSS/Atom feed for https://ollama.com/blog
-    description: >-
-      Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for OpenAI to
-      connect to locally-running models through Ollama. Supported endpoints include chat completions, completions,
-      embeddings, models, and the Responses API.
-  - aid: ollama:ollama-anthropic-compatibility-api
-    name: Ollama Anthropic Compatibility API
-    tags:
-      - Anthropic
-      - Chat
-      - Compatibility
-      - Large Language Models
-    humanURL: https://docs.ollama.com/api/anthropic-compatibility
-    baseURL: http://localhost:11434
-    properties:
-      - url: https://docs.ollama.com/api/anthropic-compatibility
-        type: Documentation
-      - url: https://ollama.com/blog/claude
-        type: Blog
-    description: >-
-      Ollama provides compatibility with the Anthropic Messages API, enabling tools like Claude Code to work with
-      locally-running open-source models. Supports messages, streaming, system prompts, tool calling, extended thinking,
-      and vision input.
-  - aid: ollama:ollama-cloud-api
-    name: Ollama Cloud API
-    tags:
-      - Cloud
-      - Inference
-      - Large Language Models
-    humanURL: https://docs.ollama.com/cloud
-    baseURL: https://ollama.com/api
-    properties:
-      - url: https://docs.ollama.com/cloud
-        type: Documentation
-      - url: https://ollama.com/cloud
-        type: GettingStarted
-      - url: https://ollama.com/pricing
-        type: Pricing
-      - url: https://ollama.com/settings/keys
-        type: Authentication
-      - url: https://ollama.com/search?c=cloud
-        type: Models
-    description: >-
-      Ollama Cloud provides cloud-hosted inference for large language models, giving access to larger models and faster
-      responses without requiring a powerful local GPU. Cloud models are accessed through the same API interface as
-      local models, with requests encrypted in transit and no storage of prompts or outputs.
+- aid: ollama:ollama-openai-compatibility-api
+  name: Ollama OpenAI Compatibility API
+  tags:
+  - Chat
+  - Compatibility
+  - Large Language Models
+  - OpenAI
+  humanURL: https://docs.ollama.com/api/openai-compatibility
+  baseURL: http://localhost:11434/v1
+  properties:
+  - url: https://docs.ollama.com/api/openai-compatibility
+    type: Documentation
+  - url: https://ollama.com/blog/openai-compatibility
+    type: Blog
+  - url: https://ollama.com/blog/rss.xml
+    type: BlogRSS
+    description: Discovered RSS/Atom feed for https://ollama.com/blog
+  description: >-
+    Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for
+    OpenAI to connect to locally-running models through Ollama. Supported endpoints include chat completions,
+    completions, embeddings, models, and the Responses API.
+- aid: ollama:ollama-anthropic-compatibility-api
+  name: Ollama Anthropic Compatibility API
+  tags:
+  - Anthropic
+  - Chat
+  - Compatibility
+  - Large Language Models
+  humanURL: https://docs.ollama.com/api/anthropic-compatibility
+  baseURL: http://localhost:11434
+  properties:
+  - url: https://docs.ollama.com/api/anthropic-compatibility
+    type: Documentation
+  - url: https://ollama.com/blog/claude
+    type: Blog
+  description: >-
+    Ollama provides compatibility with the Anthropic Messages API, enabling tools like Claude Code to
+    work with locally-running open-source models. Supports messages, streaming, system prompts, tool calling,
+    extended thinking, and vision input.
+- aid: ollama:ollama-cloud-api
+  name: Ollama Cloud API
+  tags:
+  - Cloud
+  - Inference
+  - Large Language Models
+  humanURL: https://docs.ollama.com/cloud
+  baseURL: https://ollama.com/api
+  properties:
+  - url: https://docs.ollama.com/cloud
+    type: Documentation
+  - url: https://ollama.com/cloud
+    type: GettingStarted
+  - url: https://ollama.com/pricing
+    type: Pricing
+  - url: https://ollama.com/settings/keys
+    type: Authentication
+  - url: https://ollama.com/search?c=cloud
+    type: Models
+  description: >-
+    Ollama Cloud provides cloud-hosted inference for large language models, giving access to larger models
+    and faster responses without requiring a powerful local GPU. Cloud models are accessed through the
+    same API interface as local models, with requests encrypted in transit and no storage of prompts or
+    outputs.
+- aid: ollama:ollama-blobs-api
+  name: Ollama Blobs API
+  description: Manage binary large objects used by models.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Blobs
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-blobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-chat-api
+  name: Ollama Chat API
+  description: Generate chat completions with multi-turn conversation support.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-chat-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-chat-completions-api
+  name: Ollama Chat Completions API
+  description: >-
+    Generate chat completions using the OpenAI-compatible chat endpoint with multi-turn conversation support.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-chat-completions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-completions-api
+  name: Ollama Completions API
+  description: Generate text completions using the OpenAI-compatible completions endpoint.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-completions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-embeddings-api
+  name: Ollama Embeddings API
+  description: Generate vector embeddings from text input.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Embeddings
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-embeddings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-generate-api
+  name: Ollama Generate API
+  description: Generate text completions from a prompt using a specified model.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Generate
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-generate-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-images-api
+  name: Ollama Images API
+  description: >-
+    Generate images from text descriptions using the OpenAI-compatible images endpoint. Experimental feature.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-images-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-models-api
+  name: Ollama Models API
+  description: List, show, create, copy, pull, push, and delete models.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-models-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-responses-api
+  name: Ollama Responses API
+  description: >-
+    Generate structured responses with optional reasoning using the OpenAI-compatible Responses API.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Responses
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-responses-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-running-models-api
+  name: Ollama Running Models API
+  description: View models currently loaded in memory and their resource usage.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Running Models
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-running-models-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
+- aid: ollama:ollama-version-api
+  name: Ollama Version API
+  description: Retrieve the Ollama server version.
+  humanURL: https://docs.ollama.com/api/introduction
+  baseURL: http://localhost:11434/api
+  tags:
+  - Version
+  properties:
+  - type: OpenAPI
+    url: openapi/ollama-version-api-openapi.yml
+  - type: Documentation
+    url: https://docs.ollama.com/
+  - type: GettingStarted
+    url: https://docs.ollama.com/api/introduction
+  - type: Authentication
+    url: https://docs.ollama.com/api/authentication
+  - type: Documentation
+    url: https://docs.ollama.com/api/generate
+  - type: Documentation
+    url: https://docs.ollama.com/api/chat
+  - type: Documentation
+    url: https://docs.ollama.com/api/embed
+  - type: Documentation
+    url: https://docs.ollama.com/api/tags
+  - type: Documentation
+    url: https://docs.ollama.com/api/ps
+  - type: Documentation
+    url: https://docs.ollama.com/api/create
+  - type: Documentation
+    url: https://docs.ollama.com/api/pull
+  - type: Documentation
+    url: https://docs.ollama.com/api/push
+  - type: Documentation
+    url: https://docs.ollama.com/api/copy
+  - type: Documentation
+    url: https://docs.ollama.com/api/delete
+  - type: Documentation
+    url: https://docs.ollama.com/api/show
+  - type: Documentation
+    url: https://docs.ollama.com/api/streaming
+  - type: Documentation
+    url: https://docs.ollama.com/api/errors
+  - type: Documentation
+    url: https://docs.ollama.com/api/usage
+  - type: Documentation
+    url: https://docs.ollama.com/api/blobs
+  - type: Documentation
+    url: https://docs.ollama.com/api/version
 name: Ollama
 tags:
   - Artificial Intelligence
   - Large Language Models
   - Models
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://ollama.ai/public/ollama.png
 access: 3rd-Party
 common:
