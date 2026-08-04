@@ -1,0 +1,34 @@
+{
+  "provider": "ollama",
+  "sources": [
+    "ollama-blobs-api-openapi.yml",
+    "ollama-chat-api-openapi.yml",
+    "ollama-chat-completions-api-openapi.yml",
+    "ollama-completions-api-openapi.yml",
+    "ollama-embeddings-api-openapi.yml",
+    "ollama-generate-api-openapi.yml",
+    "ollama-images-api-openapi.yml",
+    "ollama-models-api-openapi.yml",
+    "ollama-responses-api-openapi.yml",
+    "ollama-running-models-api-openapi.yml",
+    "ollama-version-api-openapi.yml"
+  ],
+  "outputs": [
+    "ollama-blobs-api-openapi.yml",
+    "ollama-chat-api-openapi.yml",
+    "ollama-chat-completions-api-openapi.yml",
+    "ollama-completions-api-openapi.yml",
+    "ollama-embeddings-api-openapi.yml",
+    "ollama-generate-api-openapi.yml",
+    "ollama-images-api-openapi.yml",
+    "ollama-models-api-openapi.yml",
+    "ollama-responses-api-openapi.yml",
+    "ollama-running-models-api-openapi.yml",
+    "ollama-version-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
