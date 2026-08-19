@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs Version API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Version",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Ollama version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:11434/api/version"
+          },
+          "docs": "Returns the version of the Ollama server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

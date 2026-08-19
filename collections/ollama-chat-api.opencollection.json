@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs Chat API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Generate a chat completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/chat",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate the next message in a chat with a provided model. This is a streaming endpoint that returns a sequence of JSON objects by default. Supports multi-turn conversations, tool calling, vision input, and structured output."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

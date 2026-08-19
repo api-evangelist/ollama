@@ -1,0 +1,292 @@
+{
+  "item": [
+    {
+      "id": "f3900a24-c14b-4dfc-ae3f-c5f2f60caa67",
+      "name": "Blobs",
+      "description": {
+        "content": "Manage binary large objects used by models.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70e2dff5-2c47-4b1a-a6b7-08eb469d5c62",
+          "name": "Ollama Check if a blob exists",
+          "request": {
+            "name": "Ollama Check if a blob exists",
+            "description": {
+              "content": "Check if a blob with the specified digest exists on the server. Returns 200 if it exists, 404 if it does not.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "blobs",
+                ":digest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digest",
+                  "description": "(Required) The SHA256 digest of the blob in the format sha256:<hex>."
+                }
+              ]
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "346a553a-3394-45c3-94b3-50dd1431c538",
+              "name": "Blob exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "blobs",
+                    ":digest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digest",
+                      "description": "(Required) The SHA256 digest of the blob in the format sha256:<hex>."
+                    }
+                  ]
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "606b30db-85ea-4a85-96cd-3164d4c66b9a",
+              "name": "Blob not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "blobs",
+                    ":digest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digest",
+                      "description": "(Required) The SHA256 digest of the blob in the format sha256:<hex>."
+                    }
+                  ]
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba29e3cf-bf0e-42c8-894b-7f31d12cd8e6",
+          "name": "Ollama Create a blob",
+          "request": {
+            "name": "Ollama Create a blob",
+            "description": {
+              "content": "Create a blob from a file on the server. Used to upload model layers or other binary data referenced by digest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "blobs",
+                ":digest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digest",
+                  "description": "(Required) The SHA256 digest of the blob in the format sha256:<hex>."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<binary>"
+            }
+          },
+          "response": [
+            {
+              "id": "c4a60143-f983-4b6c-aeaf-faa7d58dd346",
+              "name": "Blob created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "blobs",
+                    ":digest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digest",
+                      "description": "(Required) The SHA256 digest of the blob in the format sha256:<hex>."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11e9831e-0db0-4e25-9366-7e228cd830b3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "blobs",
+                    ":digest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digest",
+                      "description": "(Required) The SHA256 digest of the blob in the format sha256:<hex>."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<binary>"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5cce3e09-defa-43a7-b2c0-187ae00aec42",
+    "name": "Ollama Blobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}

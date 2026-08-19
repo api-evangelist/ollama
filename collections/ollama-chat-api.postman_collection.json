@@ -1,0 +1,213 @@
+{
+  "item": [
+    {
+      "id": "685396ef-e2b1-4704-9474-d70e2e27b24a",
+      "name": "Chat",
+      "description": {
+        "content": "Generate chat completions with multi-turn conversation support.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44e8f692-5c1e-41d8-a4aa-2425fee193e3",
+          "name": "Ollama Generate a chat completion",
+          "request": {
+            "name": "Ollama Generate a chat completion",
+            "description": {
+              "content": "Generate the next message in a chat with a provided model. This is a streaming endpoint that returns a sequence of JSON objects by default. Supports multi-turn conversations, tool calling, vision input, and structured output.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"thinking\": \"<string>\",\n      \"images\": [\n        \"<byte>\",\n        \"<byte>\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": 7735.812507705599\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": \"string\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"thinking\": \"<string>\",\n      \"images\": [\n        \"<byte>\",\n        \"<byte>\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": true,\n              \"key_1\": 2919.16607614078,\n              \"key_2\": 7378.65114061912,\n              \"key_3\": false\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": 5467.832786868344,\n              \"key_1\": 225.51212237530206\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"function\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"parameters\": {\n          \"key_0\": true\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"function\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"parameters\": {\n          \"key_0\": 2166\n        }\n      }\n    }\n  ],\n  \"format\": \"<string>\",\n  \"stream\": true,\n  \"think\": \"<boolean>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"top_k\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"min_p\": \"<number>\",\n    \"stop\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"num_ctx\": \"<integer>\",\n    \"num_predict\": \"<integer>\",\n    \"repeat_penalty\": \"<number>\",\n    \"repeat_last_n\": \"<integer>\",\n    \"tfs_z\": \"<number>\",\n    \"mirostat\": \"<integer>\",\n    \"mirostat_tau\": \"<number>\",\n    \"mirostat_eta\": \"<number>\"\n  },\n  \"logprobs\": \"<boolean>\",\n  \"top_logprobs\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "29f012fb-2dd1-4693-8568-ac0d10eb3e57",
+              "name": "Successful chat response. Returns a stream of JSON objects when streaming is enabled, or a single JSON object when disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": 8261.501033214801,\n              \"key_2\": \"string\"\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 7546.3439468626,\n              \"key_1\": 9021\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 6067.3596938838,\n              \"key_1\": 2851\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": true\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": true\n        }\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 8060.206087860346,\n          \"key_1\": 6976\n        }\n      }\n    }\n  ],\n  \"format\": \"<string>\",\n  \"stream\": true,\n  \"think\": \"<boolean>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": 2922,\n    \"temperature\": 0.44726133689138936,\n    \"top_k\": 7556,\n    \"top_p\": 0.6614260000300741,\n    \"min_p\": 0.29468742930152314,\n    \"stop\": [\n      \"string\",\n      \"string\"\n    ],\n    \"num_ctx\": 9750,\n    \"num_predict\": 2160,\n    \"repeat_penalty\": 6385.886904657668,\n    \"repeat_last_n\": 4297,\n    \"tfs_z\": 6632.418775794624,\n    \"mirostat\": 0,\n    \"mirostat_tau\": 2560.0491725369056,\n    \"mirostat_eta\": 5024.18878385932\n  },\n  \"logprobs\": \"<boolean>\",\n  \"top_logprobs\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model\": \"string\",\n  \"created_at\": \"1948-11-26T17:48:04.126Z\",\n  \"message\": {\n    \"role\": \"user\",\n    \"content\": \"string\",\n    \"thinking\": \"string\",\n    \"images\": [\n      \"string\",\n      \"string\"\n    ],\n    \"tool_calls\": [\n      {\n        \"function\": {\n          \"name\": \"string\",\n          \"arguments\": {\n            \"key_0\": \"string\"\n          }\n        }\n      },\n      {\n        \"function\": {\n          \"name\": \"string\",\n          \"arguments\": {\n            \"key_0\": 9245,\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        }\n      }\n    ]\n  },\n  \"done\": false,\n  \"done_reason\": \"string\",\n  \"total_duration\": 6309,\n  \"load_duration\": 4419,\n  \"prompt_eval_count\": 3665,\n  \"prompt_eval_duration\": 7293,\n  \"eval_count\": 6106,\n  \"eval_duration\": 9167,\n  \"logprobs\": [\n    {\n      \"token\": \"string\",\n      \"logprob\": 2199.0889410381574,\n      \"bytes\": [\n        5267,\n        6015\n      ],\n      \"top_logprobs\": [\n        {\n          \"token\": \"string\",\n          \"logprob\": 2034.1860524440326,\n          \"bytes\": [\n            1492,\n            379\n          ]\n        },\n        {\n          \"token\": \"string\",\n          \"logprob\": 6153.809004616431,\n          \"bytes\": [\n            7689,\n            5832\n          ]\n        }\n      ]\n    },\n    {\n      \"token\": \"string\",\n      \"logprob\": 7209.0352695248275,\n      \"bytes\": [\n        3176,\n        7457\n      ],\n      \"top_logprobs\": [\n        {\n          \"token\": \"string\",\n          \"logprob\": 471.0590760678868,\n          \"bytes\": [\n            7899,\n            7123\n          ]\n        },\n        {\n          \"token\": \"string\",\n          \"logprob\": 7670.175528323755,\n          \"bytes\": [\n            8496,\n            7579\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae363965-6446-40ce-8fca-d46a0b9da7d8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": 8261.501033214801,\n              \"key_2\": \"string\"\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 7546.3439468626,\n              \"key_1\": 9021\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 6067.3596938838,\n              \"key_1\": 2851\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": true\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": true\n        }\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 8060.206087860346,\n          \"key_1\": 6976\n        }\n      }\n    }\n  ],\n  \"format\": \"<string>\",\n  \"stream\": true,\n  \"think\": \"<boolean>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": 2922,\n    \"temperature\": 0.44726133689138936,\n    \"top_k\": 7556,\n    \"top_p\": 0.6614260000300741,\n    \"min_p\": 0.29468742930152314,\n    \"stop\": [\n      \"string\",\n      \"string\"\n    ],\n    \"num_ctx\": 9750,\n    \"num_predict\": 2160,\n    \"repeat_penalty\": 6385.886904657668,\n    \"repeat_last_n\": 4297,\n    \"tfs_z\": 6632.418775794624,\n    \"mirostat\": 0,\n    \"mirostat_tau\": 2560.0491725369056,\n    \"mirostat_eta\": 5024.18878385932\n  },\n  \"logprobs\": \"<boolean>\",\n  \"top_logprobs\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "409e79ee-59d8-4c8c-bcf4-9e1b3fa81e1b",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": 8261.501033214801,\n              \"key_2\": \"string\"\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 7546.3439468626,\n              \"key_1\": 9021\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 6067.3596938838,\n              \"key_1\": 2851\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": true\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": true\n        }\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 8060.206087860346,\n          \"key_1\": 6976\n        }\n      }\n    }\n  ],\n  \"format\": \"<string>\",\n  \"stream\": true,\n  \"think\": \"<boolean>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": 2922,\n    \"temperature\": 0.44726133689138936,\n    \"top_k\": 7556,\n    \"top_p\": 0.6614260000300741,\n    \"min_p\": 0.29468742930152314,\n    \"stop\": [\n      \"string\",\n      \"string\"\n    ],\n    \"num_ctx\": 9750,\n    \"num_predict\": 2160,\n    \"repeat_penalty\": 6385.886904657668,\n    \"repeat_last_n\": 4297,\n    \"tfs_z\": 6632.418775794624,\n    \"mirostat\": 0,\n    \"mirostat_tau\": 2560.0491725369056,\n    \"mirostat_eta\": 5024.18878385932\n  },\n  \"logprobs\": \"<boolean>\",\n  \"top_logprobs\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cbf93ef4-3fd5-4ed1-99c4-f37327950148",
+    "name": "Ollama Blobs Chat API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Create a blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/blobs/:digest",
+            "params": [
+              {
+                "name": "digest",
+                "value": "",
+                "type": "path",
+                "description": "The SHA256 digest of the blob in the format sha256:<hex>."
+              }
+            ]
+          },
+          "docs": "Create a blob from a file on the server. Used to upload model layers or other binary data referenced by digest."
+        },
+        {
+          "info": {
+            "name": "Ollama Check if a blob exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "http://localhost:11434/api/blobs/:digest",
+            "params": [
+              {
+                "name": "digest",
+                "value": "",
+                "type": "path",
+                "description": "The SHA256 digest of the blob in the format sha256:<hex>."
+              }
+            ]
+          },
+          "docs": "Check if a blob with the specified digest exists on the server. Returns 200 if it exists, 404 if it does not."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

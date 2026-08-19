@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs Generate API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Generate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Generate a completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a response for a given prompt with a provided model. This is a streaming endpoint that returns a sequence of JSON objects by default. The final response object includes statistics about the generation. Set stream to false to receive a single response object."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

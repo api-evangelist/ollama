@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs Models API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama List local models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:11434/api/tags"
+          },
+          "docs": "List all models that are available locally on the Ollama server, including their size, digest, and metadata details."
+        },
+        {
+          "info": {
+            "name": "Ollama Show model information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/show",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Show detailed information about a model including parameters, template, license, system prompt, capabilities, and model metadata."
+        },
+        {
+          "info": {
+            "name": "Ollama Create a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a model from an existing model with optional customizations including system prompt, template, parameters, and quantization. Streams progress updates by default."
+        },
+        {
+          "info": {
+            "name": "Ollama Copy a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/copy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a copy of an existing model under a new name. This creates a duplicate that can be modified independently."
+        },
+        {
+          "info": {
+            "name": "Ollama Pull a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/pull",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Download a model from the Ollama model registry. Streams progress updates by default with status, digest, and byte transfer information."
+        },
+        {
+          "info": {
+            "name": "Ollama Push a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/push",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload a model to the Ollama model registry for sharing. Requires authentication. Streams progress updates by default."
+        },
+        {
+          "info": {
+            "name": "Ollama Delete a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "http://localhost:11434/api/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete a model and its data from the local Ollama server. This permanently removes the model files from disk."
+        },
+        {
+          "info": {
+            "name": "Ollama List models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:11434/models"
+          },
+          "docs": "Lists the currently available models and provides basic information about each one. Compatible with the OpenAI List Models API format."
+        },
+        {
+          "info": {
+            "name": "Ollama Retrieve a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:11434/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the model to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves a model instance, providing basic information about the model. Compatible with the OpenAI Retrieve Model API format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

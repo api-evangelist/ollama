@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "74d81763-fa8f-4dca-872b-6fe25404ab3d",
+      "name": "Running Models",
+      "description": {
+        "content": "View models currently loaded in memory and their resource usage.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "313d7146-dd2c-4736-833a-7b1b149ec73f",
+          "name": "Ollama List running models",
+          "request": {
+            "name": "Ollama List running models",
+            "description": {
+              "content": "List models that are currently loaded into memory on the Ollama server, including their VRAM usage, context length, and expiration time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "ps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9df04e54-c41b-4fc1-a9f9-5ec0cf2fab46",
+              "name": "Successful response with list of running models",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"name\": \"string\",\n      \"model\": \"string\",\n      \"size\": 4615,\n      \"digest\": \"string\",\n      \"details\": {\n        \"format\": \"string\",\n        \"family\": \"string\",\n        \"families\": [\n          \"string\",\n          \"string\"\n        ],\n        \"parameter_size\": \"string\",\n        \"quantization_level\": \"string\"\n      },\n      \"expires_at\": \"2015-01-06T03:28:14.929Z\",\n      \"size_vram\": 1051,\n      \"context_length\": 6391\n    },\n    {\n      \"name\": \"string\",\n      \"model\": \"string\",\n      \"size\": 7029,\n      \"digest\": \"string\",\n      \"details\": {\n        \"format\": \"string\",\n        \"family\": \"string\",\n        \"families\": [\n          \"string\",\n          \"string\"\n        ],\n        \"parameter_size\": \"string\",\n        \"quantization_level\": \"string\"\n      },\n      \"expires_at\": \"1988-06-23T00:48:39.763Z\",\n      \"size_vram\": 1833,\n      \"context_length\": 7270\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "827d3062-ecd8-4402-afca-44cc1f19fc3a",
+    "name": "Ollama Blobs Running Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}

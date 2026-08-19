@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs Responses API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Create response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/responses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a structured response with optional reasoning. Supports streaming, tool calling, and reasoning summaries. Compatible with the OpenAI Responses API format. Added in Ollama v0.13.3."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

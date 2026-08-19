@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "id": "1c3aacd2-77f5-406c-bb1d-03efbe9a2c26",
+      "name": "Images",
+      "description": {
+        "content": "Generate images from text descriptions using the OpenAI-compatible images endpoint. Experimental feature.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2e0fe120-ff20-4ed7-9f04-f58bfdd747fe",
+          "name": "Ollama Create image",
+          "request": {
+            "name": "Ollama Create image",
+            "description": {
+              "content": "Creates an image given a text prompt. This is an experimental endpoint that may change or be removed. Only supports b64_json response format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "images",
+                "generations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"size\": \"<string>\",\n  \"response_format\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ca9a52d0-cf95-472a-97c9-b0f4009c00c4",
+              "name": "Successful image generation response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"size\": \"<string>\",\n  \"response_format\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created\": 5164,\n  \"data\": [\n    {\n      \"b64_json\": \"string\"\n    },\n    {\n      \"b64_json\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63d0ee89-ae41-4e0c-8a2b-c89a7f8a5af6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"size\": \"<string>\",\n  \"response_format\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4dc29d3b-64c8-49d0-827b-08c77156e071",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "images",
+                    "generations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"size\": \"<string>\",\n  \"response_format\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1a9f7f7c-1bce-47d2-8eea-588b6f97c46a",
+    "name": "Ollama Blobs Images API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}

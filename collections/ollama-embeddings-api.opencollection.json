@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs Embeddings API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Embeddings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama Generate embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/api/embed",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate vector embeddings from a model for a given text input or array of text inputs. Useful for semantic search, clustering, and retrieval augmented generation."
+        },
+        {
+          "info": {
+            "name": "Ollama Create embeddings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:11434/embeddings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an embedding vector representing the input text. Compatible with the OpenAI Embeddings API format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

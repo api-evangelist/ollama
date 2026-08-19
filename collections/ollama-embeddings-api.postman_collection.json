@@ -1,0 +1,378 @@
+{
+  "item": [
+    {
+      "id": "2f835543-27d4-4017-9cc8-f63522a5d2ac",
+      "name": "Embeddings",
+      "description": {
+        "content": "Generate vector embeddings from text input.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c365233-2885-4505-b56c-4b61e7961c07",
+          "name": "Ollama Generate embeddings",
+          "request": {
+            "name": "Ollama Generate embeddings",
+            "description": {
+              "content": "Generate vector embeddings from a model for a given text input or array of text inputs. Useful for semantic search, clustering, and retrieval augmented generation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "embed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"truncate\": true,\n  \"dimensions\": \"<integer>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": \"<integer>\",\n    \"temperature\": \"<number>\",\n    \"top_k\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"min_p\": \"<number>\",\n    \"stop\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"num_ctx\": \"<integer>\",\n    \"num_predict\": \"<integer>\",\n    \"repeat_penalty\": \"<number>\",\n    \"repeat_last_n\": \"<integer>\",\n    \"tfs_z\": \"<number>\",\n    \"mirostat\": \"<integer>\",\n    \"mirostat_tau\": \"<number>\",\n    \"mirostat_eta\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58b71fdb-dab5-4c95-a4c8-b018fc3c4813",
+              "name": "Successful embeddings response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "embed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"truncate\": true,\n  \"dimensions\": \"<integer>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": 3348,\n    \"temperature\": 0.24326883401207922,\n    \"top_k\": 3454,\n    \"top_p\": 0.07725923651192657,\n    \"min_p\": 0.3199464720511467,\n    \"stop\": [\n      \"string\",\n      \"string\"\n    ],\n    \"num_ctx\": 7851,\n    \"num_predict\": 633,\n    \"repeat_penalty\": 4868.509425583072,\n    \"repeat_last_n\": 5027,\n    \"tfs_z\": 5845.052736751381,\n    \"mirostat\": 1,\n    \"mirostat_tau\": 2001.6156704915156,\n    \"mirostat_eta\": 452.02395455831265\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"model\": \"string\",\n  \"embeddings\": [\n    [\n      6483.451459124988,\n      4947.750755982446\n    ],\n    [\n      7974.185380694512,\n      635.9127046503066\n    ]\n  ],\n  \"total_duration\": 5946,\n  \"load_duration\": 2476,\n  \"prompt_eval_count\": 5803\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe439373-40b8-4bd0-a326-965db258cc8a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "embed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"truncate\": true,\n  \"dimensions\": \"<integer>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": 3348,\n    \"temperature\": 0.24326883401207922,\n    \"top_k\": 3454,\n    \"top_p\": 0.07725923651192657,\n    \"min_p\": 0.3199464720511467,\n    \"stop\": [\n      \"string\",\n      \"string\"\n    ],\n    \"num_ctx\": 7851,\n    \"num_predict\": 633,\n    \"repeat_penalty\": 4868.509425583072,\n    \"repeat_last_n\": 5027,\n    \"tfs_z\": 5845.052736751381,\n    \"mirostat\": 1,\n    \"mirostat_tau\": 2001.6156704915156,\n    \"mirostat_eta\": 452.02395455831265\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c0f80e6-db09-4b41-b1e1-dc4debda06e3",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "embed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"truncate\": true,\n  \"dimensions\": \"<integer>\",\n  \"keep_alive\": \"<string>\",\n  \"options\": {\n    \"seed\": 3348,\n    \"temperature\": 0.24326883401207922,\n    \"top_k\": 3454,\n    \"top_p\": 0.07725923651192657,\n    \"min_p\": 0.3199464720511467,\n    \"stop\": [\n      \"string\",\n      \"string\"\n    ],\n    \"num_ctx\": 7851,\n    \"num_predict\": 633,\n    \"repeat_penalty\": 4868.509425583072,\n    \"repeat_last_n\": 5027,\n    \"tfs_z\": 5845.052736751381,\n    \"mirostat\": 1,\n    \"mirostat_tau\": 2001.6156704915156,\n    \"mirostat_eta\": 452.02395455831265\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aae3d3fb-8a34-40a5-bbc4-3e2572ac0112",
+          "name": "Ollama Create embeddings",
+          "request": {
+            "name": "Ollama Create embeddings",
+            "description": {
+              "content": "Creates an embedding vector representing the input text. Compatible with the OpenAI Embeddings API format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "embeddings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"encoding_format\": \"<string>\",\n  \"dimensions\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5cbf3887-4b14-4207-8a5c-059cd334685d",
+              "name": "Successful embedding response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"encoding_format\": \"<string>\",\n  \"dimensions\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"object\": \"string\",\n      \"index\": 8521,\n      \"embedding\": [\n        5626.994341908974,\n        7520.34446009755\n      ]\n    },\n    {\n      \"object\": \"string\",\n      \"index\": 6861,\n      \"embedding\": [\n        5927.668318518759,\n        9333.383654315046\n      ]\n    }\n  ],\n  \"model\": \"string\",\n  \"usage\": {\n    \"prompt_tokens\": 5739,\n    \"completion_tokens\": 7886,\n    \"total_tokens\": 2569\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac7c3884-aea4-4283-bd0a-290a14f41888",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"encoding_format\": \"<string>\",\n  \"dimensions\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10c62bd1-9991-45df-a768-39b905ac2c42",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"encoding_format\": \"<string>\",\n  \"dimensions\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ea0cb50e-9c2f-4250-b50f-56f17f20de2a",
+    "name": "Ollama Blobs Embeddings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}

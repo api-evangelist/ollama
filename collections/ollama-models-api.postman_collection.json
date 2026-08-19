@@ -1,0 +1,1154 @@
+{
+  "item": [
+    {
+      "id": "21321d4f-2470-4f55-a7e7-48ac47fb4702",
+      "name": "Models",
+      "description": {
+        "content": "List, show, create, copy, pull, push, and delete models.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "829263ee-c059-4a9c-8fca-2316285c9d27",
+          "name": "Ollama List local models",
+          "request": {
+            "name": "Ollama List local models",
+            "description": {
+              "content": "List all models that are available locally on the Ollama server, including their size, digest, and metadata details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee538248-d296-4cac-bd3e-cdfefe0345d1",
+              "name": "Successful response with list of models",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"models\": [\n    {\n      \"name\": \"string\",\n      \"model\": \"string\",\n      \"remote_model\": \"string\",\n      \"remote_host\": \"string\",\n      \"modified_at\": \"2023-03-09T18:02:46.347Z\",\n      \"size\": 3237,\n      \"digest\": \"string\",\n      \"details\": {\n        \"format\": \"string\",\n        \"family\": \"string\",\n        \"families\": [\n          \"string\",\n          \"string\"\n        ],\n        \"parameter_size\": \"string\",\n        \"quantization_level\": \"string\"\n      }\n    },\n    {\n      \"name\": \"string\",\n      \"model\": \"string\",\n      \"remote_model\": \"string\",\n      \"remote_host\": \"string\",\n      \"modified_at\": \"2001-04-18T05:52:05.898Z\",\n      \"size\": 430,\n      \"digest\": \"string\",\n      \"details\": {\n        \"format\": \"string\",\n        \"family\": \"string\",\n        \"families\": [\n          \"string\",\n          \"string\"\n        ],\n        \"parameter_size\": \"string\",\n        \"quantization_level\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a846da0-678d-437a-a524-f44ba557dd53",
+          "name": "Ollama Show model information",
+          "request": {
+            "name": "Ollama Show model information",
+            "description": {
+              "content": "Show detailed information about a model including parameters, template, license, system prompt, capabilities, and model metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "show"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"verbose\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cc6e9ced-2d96-4077-b71d-e6178aa5ba07",
+              "name": "Successful response with model details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"verbose\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"modelfile\": \"string\",\n  \"parameters\": \"string\",\n  \"template\": \"string\",\n  \"system\": \"string\",\n  \"license\": \"string\",\n  \"details\": {\n    \"format\": \"string\",\n    \"family\": \"string\",\n    \"families\": [\n      \"string\",\n      \"string\"\n    ],\n    \"parameter_size\": \"string\",\n    \"quantization_level\": \"string\"\n  },\n  \"model_info\": {\n    \"key_0\": 4845.248432251543\n  },\n  \"capabilities\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bfcd064-c2a7-4171-bc28-972a81886243",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "show"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"verbose\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7fb0408-49a2-4b16-83c4-6ba318b47afb",
+          "name": "Ollama Create a model",
+          "request": {
+            "name": "Ollama Create a model",
+            "description": {
+              "content": "Create a model from an existing model with optional customizations including system prompt, template, parameters, and quantization. Streams progress updates by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"from\": \"<string>\",\n  \"system\": \"<string>\",\n  \"template\": \"<string>\",\n  \"license\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": \"string\"\n  },\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"thinking\": \"<string>\",\n      \"images\": [\n        \"<byte>\",\n        \"<byte>\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": \"string\"\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": 2675,\n              \"key_1\": 2997,\n              \"key_2\": true,\n              \"key_3\": \"string\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"thinking\": \"<string>\",\n      \"images\": [\n        \"<byte>\",\n        \"<byte>\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": 7276,\n              \"key_1\": 1410\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"<string>\",\n            \"arguments\": {\n              \"key_0\": true,\n              \"key_1\": \"string\"\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"quantize\": \"<string>\",\n  \"stream\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed408171-09eb-4cea-8053-b6e0892a5882",
+              "name": "Model creation progress. Returns a stream of status events when streaming is enabled, or a single status response when disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"from\": \"<string>\",\n  \"system\": \"<string>\",\n  \"template\": \"<string>\",\n  \"license\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": 1151.260378865182,\n    \"key_1\": 4602.639792154414,\n    \"key_2\": true,\n    \"key_3\": \"string\"\n  },\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": true,\n              \"key_1\": 5100,\n              \"key_2\": 9695\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": 4741\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 2826.6263734176155,\n              \"key_1\": \"string\"\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": true\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"quantize\": \"<string>\",\n  \"stream\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "addd1644-cfa6-4fc3-8638-0d9978139f11",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"from\": \"<string>\",\n  \"system\": \"<string>\",\n  \"template\": \"<string>\",\n  \"license\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": 1151.260378865182,\n    \"key_1\": 4602.639792154414,\n    \"key_2\": true,\n    \"key_3\": \"string\"\n  },\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": true,\n              \"key_1\": 5100,\n              \"key_2\": 9695\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": \"string\",\n              \"key_1\": 4741\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"role\": \"system\",\n      \"content\": \"string\",\n      \"thinking\": \"string\",\n      \"images\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tool_calls\": [\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": 2826.6263734176155,\n              \"key_1\": \"string\"\n            }\n          }\n        },\n        {\n          \"function\": {\n            \"name\": \"string\",\n            \"arguments\": {\n              \"key_0\": true\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"quantize\": \"<string>\",\n  \"stream\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32127b40-8d8d-4638-b026-86723b9a9c8a",
+          "name": "Ollama Copy a model",
+          "request": {
+            "name": "Ollama Copy a model",
+            "description": {
+              "content": "Create a copy of an existing model under a new name. This creates a duplicate that can be modified independently.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "copy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"<string>\",\n  \"destination\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e198ba68-fe9b-4185-b7f0-1a07f750f97e",
+              "name": "Model successfully copied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"<string>\",\n  \"destination\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e1366d19-5588-4eb5-845d-d68a6d5ead89",
+              "name": "Source model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"<string>\",\n  \"destination\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdcd5914-70de-4759-b071-221a8e37dac4",
+          "name": "Ollama Pull a model",
+          "request": {
+            "name": "Ollama Pull a model",
+            "description": {
+              "content": "Download a model from the Ollama model registry. Streams progress updates by default with status, digest, and byte transfer information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "pull"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"stream\": true,\n  \"insecure\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75c4460b-41c3-4162-b244-37696beac73b",
+              "name": "Model download progress. Returns a stream of status events when streaming is enabled, or a single status response when disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "pull"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"stream\": true,\n  \"insecure\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2c23877-21ae-496c-b17f-576555d68c99",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "pull"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"stream\": true,\n  \"insecure\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "845dc5ff-e6c5-4699-bb8b-a422e6137fa7",
+          "name": "Ollama Push a model",
+          "request": {
+            "name": "Ollama Push a model",
+            "description": {
+              "content": "Upload a model to the Ollama model registry for sharing. Requires authentication. Streams progress updates by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "push"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-ndjson"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"stream\": true,\n  \"insecure\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54adc7f4-e248-48d4-8a8f-c0336ff60fcf",
+              "name": "Model upload progress. Returns a stream of status events when streaming is enabled, or a single status response when disabled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-ndjson"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"stream\": true,\n  \"insecure\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2326574-eea5-455c-b2d0-2c61b1ddb6a3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"stream\": true,\n  \"insecure\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e516e048-4377-48fa-aa1c-61d04adb0385",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"stream\": true,\n  \"insecure\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4d65f40-f58c-4d0a-a01a-78eca1b971c6",
+          "name": "Ollama Delete a model",
+          "request": {
+            "name": "Ollama Delete a model",
+            "description": {
+              "content": "Delete a model and its data from the local Ollama server. This permanently removes the model files from disk.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1fd04672-2004-4e9f-a7c4-fa863bfe5baf",
+              "name": "Model successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea81f427-04d2-4768-934b-34de1c2b6c12",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba42648c-148f-431b-be14-b64f586341f5",
+          "name": "Ollama List models",
+          "request": {
+            "name": "Ollama List models",
+            "description": {
+              "content": "Lists the currently available models and provides basic information about each one. Compatible with the OpenAI List Models API format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fe46bfe-873d-4434-bdae-363cc3ba90a7",
+              "name": "Successful response with list of models",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"string\",\n      \"created\": 8091,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"string\",\n      \"created\": 4661,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bdfa52c5-645e-4f32-9e02-14e718645cb6",
+          "name": "Ollama Retrieve a model",
+          "request": {
+            "name": "Ollama Retrieve a model",
+            "description": {
+              "content": "Retrieves a model instance, providing basic information about the model. Compatible with the OpenAI Retrieve Model API format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":model"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model",
+                  "description": "(Required) The identifier of the model to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4e091fb-928b-4316-af44-56da71a9a093",
+              "name": "Successful response with model information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The identifier of the model to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"created\": 7183,\n  \"owned_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46e682eb-3ac3-4dbd-b04c-d91d852fbaa3",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The identifier of the model to retrieve."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a4e0b8e2-2b9d-42e2-916f-006a6f4d45c1",
+    "name": "Ollama Blobs Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}

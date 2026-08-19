@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "9e78095f-0f5a-485a-9a2c-5f8fa1d13a1b",
+      "name": "Completions",
+      "description": {
+        "content": "Generate text completions using the OpenAI-compatible completions endpoint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5c8b950-d4d3-46c9-b508-7f37572d4c6d",
+          "name": "Ollama Create completion",
+          "request": {
+            "name": "Ollama Create completion",
+            "description": {
+              "content": "Creates a completion for the provided prompt. Compatible with the OpenAI Completions API format. Supports streaming, JSON mode, and reproducible outputs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"frequency_penalty\": \"<number>\",\n  \"presence_penalty\": \"<number>\",\n  \"seed\": \"<integer>\",\n  \"stop\": \"<string>\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": \"<boolean>\"\n  },\n  \"suffix\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51f86b9f-c60c-47c3-a8d0-5755fd6c898e",
+              "name": "Successful completion response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"frequency_penalty\": \"<number>\",\n  \"presence_penalty\": \"<number>\",\n  \"seed\": \"<integer>\",\n  \"stop\": \"<string>\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": \"<boolean>\"\n  },\n  \"suffix\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"created\": 9131,\n  \"model\": \"string\",\n  \"choices\": [\n    {\n      \"index\": 8627,\n      \"text\": \"string\",\n      \"finish_reason\": \"length\"\n    },\n    {\n      \"index\": 2764,\n      \"text\": \"string\",\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 4251,\n    \"completion_tokens\": 648,\n    \"total_tokens\": 4689\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f379cd64-e66e-43e9-a581-fd635d53082e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"frequency_penalty\": \"<number>\",\n  \"presence_penalty\": \"<number>\",\n  \"seed\": \"<integer>\",\n  \"stop\": \"<string>\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": \"<boolean>\"\n  },\n  \"suffix\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "519d7980-27f8-418e-b15b-d720cd7fb41e",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_tokens\": \"<integer>\",\n  \"frequency_penalty\": \"<number>\",\n  \"presence_penalty\": \"<number>\",\n  \"seed\": \"<integer>\",\n  \"stop\": \"<string>\",\n  \"stream\": false,\n  \"stream_options\": {\n    \"include_usage\": \"<boolean>\"\n  },\n  \"suffix\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8cb5dcfc-9229-4f1d-a009-0b72a219c1ad",
+    "name": "Ollama Blobs Completions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}

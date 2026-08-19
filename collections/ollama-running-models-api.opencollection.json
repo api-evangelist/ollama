@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ollama Blobs Running Models API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Running Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ollama List running models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:11434/api/ps"
+          },
+          "docs": "List models that are currently loaded into memory on the Ollama server, including their VRAM usage, context length, and expiration time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

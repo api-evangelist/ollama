@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "bfd80d6f-0e6f-47cf-bd5f-a7a8c3ad5b30",
+      "name": "Responses",
+      "description": {
+        "content": "Generate structured responses with optional reasoning using the OpenAI-compatible Responses API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "520ec07e-928e-4408-9a68-7b70f9c76215",
+          "name": "Ollama Create response",
+          "request": {
+            "name": "Ollama Create response",
+            "description": {
+              "content": "Creates a structured response with optional reasoning. Supports streaming, tool calling, and reasoning summaries. Compatible with the OpenAI Responses API format. Added in Ollama v0.13.3.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "responses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"tools\": [\n    {\n      \"type\": \"<string>\",\n      \"function\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"parameters\": {\n          \"key_0\": false\n        }\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"function\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"parameters\": {\n          \"key_0\": \"string\",\n          \"key_1\": 8405\n        }\n      }\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_output_tokens\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65567667-1dd1-4023-b34c-95abf85900ed",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 3097.567325371081,\n          \"key_1\": true,\n          \"key_2\": \"string\"\n        }\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 5234,\n          \"key_1\": 4588\n        }\n      }\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_output_tokens\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"created_at\": 7950,\n  \"model\": \"string\",\n  \"output\": [\n    {\n      \"key_0\": 1139,\n      \"key_1\": false,\n      \"key_2\": true,\n      \"key_3\": true\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 7738.014974422194\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 8010,\n    \"completion_tokens\": 2579,\n    \"total_tokens\": 5461\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52d8efb7-7c9b-48c8-9b20-6eb6be36179b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 3097.567325371081,\n          \"key_1\": true,\n          \"key_2\": \"string\"\n        }\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 5234,\n          \"key_1\": 4588\n        }\n      }\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_output_tokens\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "13775f11-f8a8-44af-bb6f-ec96e06c4b11",
+              "name": "Model not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "responses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"input\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"tools\": [\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 3097.567325371081,\n          \"key_1\": true,\n          \"key_2\": \"string\"\n        }\n      }\n    },\n    {\n      \"type\": \"function\",\n      \"function\": {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"parameters\": {\n          \"key_0\": 5234,\n          \"key_1\": 4588\n        }\n      }\n    }\n  ],\n  \"stream\": false,\n  \"temperature\": \"<number>\",\n  \"top_p\": \"<number>\",\n  \"max_output_tokens\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:11434",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b5191894-9d4b-476f-bef4-fea62f3b4833",
+    "name": "Ollama Blobs Responses API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.\n\nContact Support:\n Name: Ollama Team",
+      "type": "text/plain"
+    }
+  }
+}
