@@ -360,6 +360,8 @@ apis:
   humanURL: https://docs.ollama.com/api/introduction
   baseURL: http://localhost:11434/api
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
