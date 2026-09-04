@@ -622,11 +622,12 @@ accessModel:
   try_now: true
   public: false
   label: Freemium · Self-serve signup
-  confidence: high
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://ollama.ai/public/ollama.png
 access: 3rd-Party
@@ -755,7 +756,7 @@ common:
     type: Documentation
 created: '2025-11-19'
 modified: '2026-05-19'
-position: Consumer
+position: Consuming
 description: API for running large language models locally.
 integrations:
   - name: Ollama
