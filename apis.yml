@@ -602,6 +602,7 @@ tags:
   - Artificial Intelligence
   - Large Language Models
   - Models
+  - Ollama
 type: Index
 deliveryModel:
   model: saas
