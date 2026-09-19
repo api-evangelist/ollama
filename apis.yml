@@ -6,6 +6,11 @@ apis:
   tags:
   - Chat
   - Compatibility
+  - LLM
+  - OpenAI
+  tags_raw:
+  - Chat
+  - Compatibility
   - Large Language Models
   - OpenAI
   humanURL: https://docs.ollama.com/api/openai-compatibility
@@ -28,6 +33,11 @@ apis:
   - Anthropic
   - Chat
   - Compatibility
+  - LLM
+  tags_raw:
+  - Anthropic
+  - Chat
+  - Compatibility
   - Large Language Models
   humanURL: https://docs.ollama.com/api/anthropic-compatibility
   baseURL: http://localhost:11434
@@ -43,6 +53,10 @@ apis:
 - aid: ollama:ollama-cloud-api
   name: Ollama Cloud API
   tags:
+  - Cloud
+  - Inference
+  - LLM
+  tags_raw:
   - Cloud
   - Inference
   - Large Language Models
@@ -600,9 +614,14 @@ apis:
 name: Ollama
 tags:
   - Artificial Intelligence
+  - LLM
+  - Models
+tags_raw:
+  - Large Language Models
+  - Ollama
+  - Artificial Intelligence
   - Large Language Models
   - Models
-  - Ollama
 type: Index
 deliveryModel:
   model: saas
