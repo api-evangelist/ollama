@@ -613,8 +613,9 @@ apis:
     url: https://docs.ollama.com/api/version
 name: Ollama
 tags:
-  - Artificial Intelligence
   - LLM
+  - Ollama
+  - Artificial Intelligence
   - Models
 tags_raw:
   - Large Language Models
