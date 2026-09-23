@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ollama Blobs Running Models API
+  title: Ollama Running Models API
   description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
   version: 0.1.0
   contact:
@@ -33,6 +33,34 @@ paths:
                 $ref: '#/components/schemas/PsResponse'
 components:
   schemas:
+    RunningModel:
+      type: object
+      description: Information about a model currently loaded in memory.
+      properties:
+        name:
+          type: string
+          description: The model name identifier.
+        model:
+          type: string
+          description: The model identifier.
+        size:
+          type: integer
+          description: The model size in bytes.
+        digest:
+          type: string
+          description: The SHA256 hash of the model contents.
+        details:
+          $ref: '#/components/schemas/ModelDetails'
+        expires_at:
+          type: string
+          format: date-time
+          description: The timestamp when the model will be unloaded from memory.
+        size_vram:
+          type: integer
+          description: The amount of VRAM consumed by the model in bytes.
+        context_length:
+          type: integer
+          description: The maximum context window length supported.
     PsResponse:
       type: object
       description: Response containing a list of models currently loaded in memory.
@@ -63,34 +91,6 @@ components:
         quantization_level:
           type: string
           description: The quantization method used, such as Q4_0 or Q4_K_M.
-    RunningModel:
-      type: object
-      description: Information about a model currently loaded in memory.
-      properties:
-        name:
-          type: string
-          description: The model name identifier.
-        model:
-          type: string
-          description: The model identifier.
-        size:
-          type: integer
-          description: The model size in bytes.
-        digest:
-          type: string
-          description: The SHA256 hash of the model contents.
-        details:
-          $ref: '#/components/schemas/ModelDetails'
-        expires_at:
-          type: string
-          format: date-time
-          description: The timestamp when the model will be unloaded from memory.
-        size_vram:
-          type: integer
-          description: The amount of VRAM consumed by the model in bytes.
-        context_length:
-          type: integer
-          description: The maximum context window length supported.
 externalDocs:
   description: Ollama API Documentation
   url: https://docs.ollama.com/api/introduction

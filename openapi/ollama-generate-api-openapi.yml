@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ollama Blobs Generate API
+  title: Ollama Generate API
   description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
   version: 0.1.0
   contact:
@@ -54,6 +54,52 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    GenerateResponse:
+      type: object
+      description: Response object from a text generation request. When streaming, partial objects are returned until done is true.
+      properties:
+        model:
+          type: string
+          description: The model that generated the response.
+        created_at:
+          type: string
+          format: date-time
+          description: The ISO 8601 timestamp when the response was created.
+        response:
+          type: string
+          description: The generated text response. In streaming mode, contains the partial response for each chunk.
+        thinking:
+          type: string
+          description: The model's thinking output when think is enabled.
+        done:
+          type: boolean
+          description: Indicates whether the generation has completed. The final response in a stream has done set to true.
+        done_reason:
+          type: string
+          description: The reason the generation stopped. Common values include stop and length.
+        total_duration:
+          type: integer
+          description: Total time spent generating the response in nanoseconds.
+        load_duration:
+          type: integer
+          description: Time spent loading the model in nanoseconds.
+        prompt_eval_count:
+          type: integer
+          description: Number of tokens in the prompt that were evaluated.
+        prompt_eval_duration:
+          type: integer
+          description: Time spent evaluating the prompt in nanoseconds.
+        eval_count:
+          type: integer
+          description: Number of tokens generated in the response.
+        eval_duration:
+          type: integer
+          description: Time spent generating output tokens in nanoseconds.
+        logprobs:
+          type: array
+          description: Log probability information for generated tokens when logprobs is enabled.
+          items:
+            $ref: '#/components/schemas/Logprob'
     Logprob:
       type: object
       description: Log probability information for a generated token.
@@ -86,6 +132,72 @@ components:
                 description: The byte representation of the alternative token.
                 items:
                   type: integer
+    ModelOptions:
+      type: object
+      description: Runtime options that control text generation behavior. These override the model's default parameter values.
+      properties:
+        seed:
+          type: integer
+          description: Random seed for reproducible generation. Set to a specific value for deterministic output.
+        temperature:
+          type: number
+          description: Controls the creativity of responses. Higher values produce more varied output. Range 0.0 to 2.0.
+          minimum: 0.0
+          maximum: 2.0
+        top_k:
+          type: integer
+          description: Limits token selection to the top K most probable tokens. Lower values produce more focused output.
+          minimum: 0
+        top_p:
+          type: number
+          description: Nucleus sampling probability cutoff. Limits selection to the smallest set of tokens whose cumulative probability exceeds this value.
+          minimum: 0.0
+          maximum: 1.0
+        min_p:
+          type: number
+          description: Minimum probability threshold relative to the most likely token. Tokens below this threshold are filtered out.
+          minimum: 0.0
+          maximum: 1.0
+        stop:
+          type: array
+          description: A list of stop sequences. Generation halts when any of these strings are produced.
+          items:
+            type: string
+        num_ctx:
+          type: integer
+          description: The maximum context window size in tokens.
+        num_predict:
+          type: integer
+          description: The maximum number of tokens to generate in the response.
+        repeat_penalty:
+          type: number
+          description: Penalty applied to repeated tokens to reduce repetition.
+        repeat_last_n:
+          type: integer
+          description: Number of recent tokens to consider for repeat penalty.
+        tfs_z:
+          type: number
+          description: Tail-free sampling parameter. Higher values reduce the impact of less probable tokens.
+        mirostat:
+          type: integer
+          description: Enable Mirostat sampling for perplexity control. 0 is disabled, 1 uses Mirostat, 2 uses Mirostat 2.0.
+          enum:
+          - 0
+          - 1
+          - 2
+        mirostat_tau:
+          type: number
+          description: Target entropy for Mirostat sampling.
+        mirostat_eta:
+          type: number
+          description: Learning rate for Mirostat sampling.
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
     GenerateRequest:
       type: object
       description: Request body for generating a text completion from a prompt.
@@ -148,118 +260,6 @@ components:
           type: integer
           description: Number of most likely tokens to return at each token position, along with their log probabilities.
           minimum: 0
-    GenerateResponse:
-      type: object
-      description: Response object from a text generation request. When streaming, partial objects are returned until done is true.
-      properties:
-        model:
-          type: string
-          description: The model that generated the response.
-        created_at:
-          type: string
-          format: date-time
-          description: The ISO 8601 timestamp when the response was created.
-        response:
-          type: string
-          description: The generated text response. In streaming mode, contains the partial response for each chunk.
-        thinking:
-          type: string
-          description: The model's thinking output when think is enabled.
-        done:
-          type: boolean
-          description: Indicates whether the generation has completed. The final response in a stream has done set to true.
-        done_reason:
-          type: string
-          description: The reason the generation stopped. Common values include stop and length.
-        total_duration:
-          type: integer
-          description: Total time spent generating the response in nanoseconds.
-        load_duration:
-          type: integer
-          description: Time spent loading the model in nanoseconds.
-        prompt_eval_count:
-          type: integer
-          description: Number of tokens in the prompt that were evaluated.
-        prompt_eval_duration:
-          type: integer
-          description: Time spent evaluating the prompt in nanoseconds.
-        eval_count:
-          type: integer
-          description: Number of tokens generated in the response.
-        eval_duration:
-          type: integer
-          description: Time spent generating output tokens in nanoseconds.
-        logprobs:
-          type: array
-          description: Log probability information for generated tokens when logprobs is enabled.
-          items:
-            $ref: '#/components/schemas/Logprob'
-    ErrorResponse:
-      type: object
-      description: An error response returned when a request fails.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message describing the problem.
-    ModelOptions:
-      type: object
-      description: Runtime options that control text generation behavior. These override the model's default parameter values.
-      properties:
-        seed:
-          type: integer
-          description: Random seed for reproducible generation. Set to a specific value for deterministic output.
-        temperature:
-          type: number
-          description: Controls the creativity of responses. Higher values produce more varied output. Range 0.0 to 2.0.
-          minimum: 0.0
-          maximum: 2.0
-        top_k:
-          type: integer
-          description: Limits token selection to the top K most probable tokens. Lower values produce more focused output.
-          minimum: 0
-        top_p:
-          type: number
-          description: Nucleus sampling probability cutoff. Limits selection to the smallest set of tokens whose cumulative probability exceeds this value.
-          minimum: 0.0
-          maximum: 1.0
-        min_p:
-          type: number
-          description: Minimum probability threshold relative to the most likely token. Tokens below this threshold are filtered out.
-          minimum: 0.0
-          maximum: 1.0
-        stop:
-          type: array
-          description: A list of stop sequences. Generation halts when any of these strings are produced.
-          items:
-            type: string
-        num_ctx:
-          type: integer
-          description: The maximum context window size in tokens.
-        num_predict:
-          type: integer
-          description: The maximum number of tokens to generate in the response.
-        repeat_penalty:
-          type: number
-          description: Penalty applied to repeated tokens to reduce repetition.
-        repeat_last_n:
-          type: integer
-          description: Number of recent tokens to consider for repeat penalty.
-        tfs_z:
-          type: number
-          description: Tail-free sampling parameter. Higher values reduce the impact of less probable tokens.
-        mirostat:
-          type: integer
-          description: Enable Mirostat sampling for perplexity control. 0 is disabled, 1 uses Mirostat, 2 uses Mirostat 2.0.
-          enum:
-          - 0
-          - 1
-          - 2
-        mirostat_tau:
-          type: number
-          description: Target entropy for Mirostat sampling.
-        mirostat_eta:
-          type: number
-          description: Learning rate for Mirostat sampling.
 externalDocs:
   description: Ollama API Documentation
   url: https://docs.ollama.com/api/introduction

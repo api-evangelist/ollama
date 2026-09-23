@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ollama Blobs Responses API
-  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  title: Ollama OpenAI Compatibility Responses API
+  description: Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for OpenAI to connect to locally-running models through Ollama. Supported endpoints include chat completions, completions, embeddings, models, images, and the Responses API.
   version: 0.1.0
   contact:
     name: Ollama Team
@@ -9,10 +9,11 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-  termsOfService: https://ollama.com/terms
 servers:
-- url: http://localhost:11434
-  description: Local Ollama Server
+- url: http://localhost:11434/v1
+  description: Local Ollama Server (OpenAI-compatible)
+security:
+- bearerAuth: []
 tags:
 - name: Responses
   description: Generate structured responses with optional reasoning using the OpenAI-compatible Responses API.
@@ -70,6 +71,19 @@ components:
             additionalProperties: true
         usage:
           $ref: '#/components/schemas/UsageStats'
+    UsageStats:
+      type: object
+      description: Token usage statistics for the request.
+      properties:
+        prompt_tokens:
+          type: integer
+          description: Number of tokens in the prompt.
+        completion_tokens:
+          type: integer
+          description: Number of tokens in the generated completion.
+        total_tokens:
+          type: integer
+          description: Total number of tokens used in the request.
     ResponseRequest:
       type: object
       description: Request body for the Responses API in OpenAI-compatible format.
@@ -113,30 +127,6 @@ components:
         max_output_tokens:
           type: integer
           description: Maximum number of output tokens to generate.
-    ResponseStreamEvent:
-      type: object
-      description: A streaming event from the Responses API.
-      properties:
-        type:
-          type: string
-          description: The type of streaming event.
-        data:
-          type: object
-          description: The event data payload.
-          additionalProperties: true
-    UsageStats:
-      type: object
-      description: Token usage statistics for the request.
-      properties:
-        prompt_tokens:
-          type: integer
-          description: Number of tokens in the prompt.
-        completion_tokens:
-          type: integer
-          description: Number of tokens in the generated completion.
-        total_tokens:
-          type: integer
-          description: Total number of tokens used in the request.
     OpenAIToolDefinition:
       type: object
       description: A tool definition in OpenAI-compatible format.
@@ -165,6 +155,22 @@ components:
               type: object
               description: The function parameters as a JSON Schema object.
               additionalProperties: true
+    ResponseStreamEvent:
+      type: object
+      description: A streaming event from the Responses API.
+      properties:
+        type:
+          type: string
+          description: The type of streaming event.
+        data:
+          type: object
+          description: The event data payload.
+          additionalProperties: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key authentication. The key is accepted but not validated by Ollama. Use any value such as ollama.
 externalDocs:
-  description: Ollama API Documentation
-  url: https://docs.ollama.com/api/introduction
+  description: Ollama OpenAI Compatibility Documentation
+  url: https://docs.ollama.com/api/openai-compatibility

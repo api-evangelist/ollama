@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Ollama Blobs Images API
-  description: Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+  title: Ollama OpenAI Compatibility Images API
+  description: Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for OpenAI to connect to locally-running models through Ollama. Supported endpoints include chat completions, completions, embeddings, models, images, and the Responses API.
   version: 0.1.0
   contact:
     name: Ollama Team
@@ -9,10 +9,11 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-  termsOfService: https://ollama.com/terms
 servers:
-- url: http://localhost:11434
-  description: Local Ollama Server
+- url: http://localhost:11434/v1
+  description: Local Ollama Server (OpenAI-compatible)
+security:
+- bearerAuth: []
 tags:
 - name: Images
   description: Generate images from text descriptions using the OpenAI-compatible images endpoint. Experimental feature.
@@ -43,22 +44,6 @@ paths:
           description: Model not found
 components:
   schemas:
-    ImageGenerationResponse:
-      type: object
-      description: Response object from an image generation request.
-      properties:
-        created:
-          type: integer
-          description: Unix timestamp of when the image was created.
-        data:
-          type: array
-          description: The generated image data.
-          items:
-            type: object
-            properties:
-              b64_json:
-                type: string
-                description: The base64-encoded image data.
     ImageGenerationRequest:
       type: object
       description: Request body for generating images in OpenAI-compatible format. This is an experimental endpoint.
@@ -80,6 +65,27 @@ components:
           description: The format in which the image is returned. Only b64_json is supported.
           enum:
           - b64_json
+    ImageGenerationResponse:
+      type: object
+      description: Response object from an image generation request.
+      properties:
+        created:
+          type: integer
+          description: Unix timestamp of when the image was created.
+        data:
+          type: array
+          description: The generated image data.
+          items:
+            type: object
+            properties:
+              b64_json:
+                type: string
+                description: The base64-encoded image data.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: API key authentication. The key is accepted but not validated by Ollama. Use any value such as ollama.
 externalDocs:
-  description: Ollama API Documentation
-  url: https://docs.ollama.com/api/introduction
+  description: Ollama OpenAI Compatibility Documentation
+  url: https://docs.ollama.com/api/openai-compatibility

@@ -1,34 +1,44 @@
 {
   "provider": "ollama",
   "sources": [
-    "ollama-blobs-api-openapi.yml",
-    "ollama-chat-api-openapi.yml",
-    "ollama-chat-completions-api-openapi.yml",
-    "ollama-completions-api-openapi.yml",
-    "ollama-embeddings-api-openapi.yml",
-    "ollama-generate-api-openapi.yml",
-    "ollama-images-api-openapi.yml",
-    "ollama-models-api-openapi.yml",
-    "ollama-responses-api-openapi.yml",
-    "ollama-running-models-api-openapi.yml",
-    "ollama-version-api-openapi.yml"
+    "_original/ollama-api-openapi.yml",
+    "_original/ollama-openai-compatibility-api-openapi.yml"
   ],
   "outputs": [
     "ollama-blobs-api-openapi.yml",
     "ollama-chat-api-openapi.yml",
-    "ollama-chat-completions-api-openapi.yml",
-    "ollama-completions-api-openapi.yml",
     "ollama-embeddings-api-openapi.yml",
     "ollama-generate-api-openapi.yml",
-    "ollama-images-api-openapi.yml",
     "ollama-models-api-openapi.yml",
-    "ollama-responses-api-openapi.yml",
     "ollama-running-models-api-openapi.yml",
-    "ollama-version-api-openapi.yml"
+    "ollama-version-api-openapi.yml",
+    "ollama-chat-completions-api-openapi.yml",
+    "ollama-completions-api-openapi.yml",
+    "ollama-images-api-openapi.yml",
+    "ollama-responses-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ollama-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "ollama-openai-compatibility-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Embeddings' spans 2 source specs (ollama-api-openapi.yml, ollama-openai-compatibility-api-openapi.yml): per-path servers applied",
+    "tag 'Models' spans 2 source specs (ollama-api-openapi.yml, ollama-openai-compatibility-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ollama-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-chat-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-embeddings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-generate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-responses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-running-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ollama-version-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
