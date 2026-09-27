@@ -54,84 +54,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    GenerateResponse:
-      type: object
-      description: Response object from a text generation request. When streaming, partial objects are returned until done is true.
-      properties:
-        model:
-          type: string
-          description: The model that generated the response.
-        created_at:
-          type: string
-          format: date-time
-          description: The ISO 8601 timestamp when the response was created.
-        response:
-          type: string
-          description: The generated text response. In streaming mode, contains the partial response for each chunk.
-        thinking:
-          type: string
-          description: The model's thinking output when think is enabled.
-        done:
-          type: boolean
-          description: Indicates whether the generation has completed. The final response in a stream has done set to true.
-        done_reason:
-          type: string
-          description: The reason the generation stopped. Common values include stop and length.
-        total_duration:
-          type: integer
-          description: Total time spent generating the response in nanoseconds.
-        load_duration:
-          type: integer
-          description: Time spent loading the model in nanoseconds.
-        prompt_eval_count:
-          type: integer
-          description: Number of tokens in the prompt that were evaluated.
-        prompt_eval_duration:
-          type: integer
-          description: Time spent evaluating the prompt in nanoseconds.
-        eval_count:
-          type: integer
-          description: Number of tokens generated in the response.
-        eval_duration:
-          type: integer
-          description: Time spent generating output tokens in nanoseconds.
-        logprobs:
-          type: array
-          description: Log probability information for generated tokens when logprobs is enabled.
-          items:
-            $ref: '#/components/schemas/Logprob'
-    Logprob:
-      type: object
-      description: Log probability information for a generated token.
-      properties:
-        token:
-          type: string
-          description: The token text.
-        logprob:
-          type: number
-          description: The log probability of the token.
-        bytes:
-          type: array
-          description: The byte representation of the token.
-          items:
-            type: integer
-        top_logprobs:
-          type: array
-          description: The most likely alternative tokens and their log probabilities at this position.
-          items:
-            type: object
-            properties:
-              token:
-                type: string
-                description: The alternative token text.
-              logprob:
-                type: number
-                description: The log probability of the alternative token.
-              bytes:
-                type: array
-                description: The byte representation of the alternative token.
-                items:
-                  type: integer
     ModelOptions:
       type: object
       description: Runtime options that control text generation behavior. These override the model's default parameter values.
@@ -191,13 +113,52 @@ components:
         mirostat_eta:
           type: number
           description: Learning rate for Mirostat sampling.
-    ErrorResponse:
+    GenerateResponse:
       type: object
-      description: An error response returned when a request fails.
+      description: Response object from a text generation request. When streaming, partial objects are returned until done is true.
       properties:
-        error:
+        model:
           type: string
-          description: A human-readable error message describing the problem.
+          description: The model that generated the response.
+        created_at:
+          type: string
+          format: date-time
+          description: The ISO 8601 timestamp when the response was created.
+        response:
+          type: string
+          description: The generated text response. In streaming mode, contains the partial response for each chunk.
+        thinking:
+          type: string
+          description: The model's thinking output when think is enabled.
+        done:
+          type: boolean
+          description: Indicates whether the generation has completed. The final response in a stream has done set to true.
+        done_reason:
+          type: string
+          description: The reason the generation stopped. Common values include stop and length.
+        total_duration:
+          type: integer
+          description: Total time spent generating the response in nanoseconds.
+        load_duration:
+          type: integer
+          description: Time spent loading the model in nanoseconds.
+        prompt_eval_count:
+          type: integer
+          description: Number of tokens in the prompt that were evaluated.
+        prompt_eval_duration:
+          type: integer
+          description: Time spent evaluating the prompt in nanoseconds.
+        eval_count:
+          type: integer
+          description: Number of tokens generated in the response.
+        eval_duration:
+          type: integer
+          description: Time spent generating output tokens in nanoseconds.
+        logprobs:
+          type: array
+          description: Log probability information for generated tokens when logprobs is enabled.
+          items:
+            $ref: '#/components/schemas/Logprob'
     GenerateRequest:
       type: object
       description: Request body for generating a text completion from a prompt.
@@ -260,6 +221,45 @@ components:
           type: integer
           description: Number of most likely tokens to return at each token position, along with their log probabilities.
           minimum: 0
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
+    Logprob:
+      type: object
+      description: Log probability information for a generated token.
+      properties:
+        token:
+          type: string
+          description: The token text.
+        logprob:
+          type: number
+          description: The log probability of the token.
+        bytes:
+          type: array
+          description: The byte representation of the token.
+          items:
+            type: integer
+        top_logprobs:
+          type: array
+          description: The most likely alternative tokens and their log probabilities at this position.
+          items:
+            type: object
+            properties:
+              token:
+                type: string
+                description: The alternative token text.
+              logprob:
+                type: number
+                description: The log probability of the alternative token.
+              bytes:
+                type: array
+                description: The byte representation of the alternative token.
+                items:
+                  type: integer
 externalDocs:
   description: Ollama API Documentation
   url: https://docs.ollama.com/api/introduction

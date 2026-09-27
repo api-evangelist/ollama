@@ -44,6 +44,22 @@ paths:
           description: Model not found
 components:
   schemas:
+    ImageGenerationResponse:
+      type: object
+      description: Response object from an image generation request.
+      properties:
+        created:
+          type: integer
+          description: Unix timestamp of when the image was created.
+        data:
+          type: array
+          description: The generated image data.
+          items:
+            type: object
+            properties:
+              b64_json:
+                type: string
+                description: The base64-encoded image data.
     ImageGenerationRequest:
       type: object
       description: Request body for generating images in OpenAI-compatible format. This is an experimental endpoint.
@@ -65,22 +81,6 @@ components:
           description: The format in which the image is returned. Only b64_json is supported.
           enum:
           - b64_json
-    ImageGenerationResponse:
-      type: object
-      description: Response object from an image generation request.
-      properties:
-        created:
-          type: integer
-          description: Unix timestamp of when the image was created.
-        data:
-          type: array
-          description: The generated image data.
-          items:
-            type: object
-            properties:
-              b64_json:
-                type: string
-                description: The base64-encoded image data.
   securitySchemes:
     bearerAuth:
       type: http

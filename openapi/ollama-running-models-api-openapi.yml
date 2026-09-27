@@ -33,6 +33,36 @@ paths:
                 $ref: '#/components/schemas/PsResponse'
 components:
   schemas:
+    ModelDetails:
+      type: object
+      description: Detailed metadata about a model's format and architecture.
+      properties:
+        format:
+          type: string
+          description: The file format of the model, such as gguf.
+        family:
+          type: string
+          description: The primary model family, such as llama or gemma.
+        families:
+          type: array
+          description: All model families this model belongs to.
+          items:
+            type: string
+        parameter_size:
+          type: string
+          description: The parameter count label, such as 7B or 13B.
+        quantization_level:
+          type: string
+          description: The quantization method used, such as Q4_0 or Q4_K_M.
+    PsResponse:
+      type: object
+      description: Response containing a list of models currently loaded in memory.
+      properties:
+        models:
+          type: array
+          description: The list of currently running models.
+          items:
+            $ref: '#/components/schemas/RunningModel'
     RunningModel:
       type: object
       description: Information about a model currently loaded in memory.
@@ -61,36 +91,6 @@ components:
         context_length:
           type: integer
           description: The maximum context window length supported.
-    PsResponse:
-      type: object
-      description: Response containing a list of models currently loaded in memory.
-      properties:
-        models:
-          type: array
-          description: The list of currently running models.
-          items:
-            $ref: '#/components/schemas/RunningModel'
-    ModelDetails:
-      type: object
-      description: Detailed metadata about a model's format and architecture.
-      properties:
-        format:
-          type: string
-          description: The file format of the model, such as gguf.
-        family:
-          type: string
-          description: The primary model family, such as llama or gemma.
-        families:
-          type: array
-          description: All model families this model belongs to.
-          items:
-            type: string
-        parameter_size:
-          type: string
-          description: The parameter count label, such as 7B or 13B.
-        quantization_level:
-          type: string
-          description: The quantization method used, such as Q4_0 or Q4_K_M.
 externalDocs:
   description: Ollama API Documentation
   url: https://docs.ollama.com/api/introduction

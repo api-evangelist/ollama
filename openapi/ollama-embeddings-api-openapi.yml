@@ -84,6 +84,29 @@ paths:
       description: Local Ollama Server (OpenAI-compatible)
 components:
   schemas:
+    EmbedResponse:
+      type: object
+      description: Response object from an embedding generation request containing the computed vectors.
+      properties:
+        model:
+          type: string
+          description: The model that produced the embeddings.
+        embeddings:
+          type: array
+          description: The array of embedding vectors, one per input text.
+          items:
+            type: array
+            items:
+              type: number
+        total_duration:
+          type: integer
+          description: Total time spent generating embeddings in nanoseconds.
+        load_duration:
+          type: integer
+          description: Time spent loading the model in nanoseconds.
+        prompt_eval_count:
+          type: integer
+          description: Number of input tokens processed to generate the embeddings.
     ModelOptions:
       type: object
       description: Runtime options that control text generation behavior. These override the model's default parameter values.
@@ -181,29 +204,19 @@ components:
           - type: number
         options:
           $ref: '#/components/schemas/ModelOptions'
-    EmbedResponse:
+    UsageStats:
       type: object
-      description: Response object from an embedding generation request containing the computed vectors.
+      description: Token usage statistics for the request.
       properties:
-        model:
-          type: string
-          description: The model that produced the embeddings.
-        embeddings:
-          type: array
-          description: The array of embedding vectors, one per input text.
-          items:
-            type: array
-            items:
-              type: number
-        total_duration:
+        prompt_tokens:
           type: integer
-          description: Total time spent generating embeddings in nanoseconds.
-        load_duration:
+          description: Number of tokens in the prompt.
+        completion_tokens:
           type: integer
-          description: Time spent loading the model in nanoseconds.
-        prompt_eval_count:
+          description: Number of tokens in the generated completion.
+        total_tokens:
           type: integer
-          description: Number of input tokens processed to generate the embeddings.
+          description: Total number of tokens used in the request.
     EmbeddingResponse:
       type: object
       description: Response object from an embedding request.
@@ -235,19 +248,6 @@ components:
           description: The model used to generate the embeddings.
         usage:
           $ref: '#/components/schemas/UsageStats'
-    UsageStats:
-      type: object
-      description: Token usage statistics for the request.
-      properties:
-        prompt_tokens:
-          type: integer
-          description: Number of tokens in the prompt.
-        completion_tokens:
-          type: integer
-          description: Number of tokens in the generated completion.
-        total_tokens:
-          type: integer
-          description: Total number of tokens used in the request.
     EmbeddingRequest:
       type: object
       description: Request body for creating embeddings in OpenAI-compatible format.

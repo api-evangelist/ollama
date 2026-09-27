@@ -84,6 +84,19 @@ components:
                 - length
         usage:
           $ref: '#/components/schemas/UsageStats'
+    UsageStats:
+      type: object
+      description: Token usage statistics for the request.
+      properties:
+        prompt_tokens:
+          type: integer
+          description: Number of tokens in the prompt.
+        completion_tokens:
+          type: integer
+          description: Number of tokens in the generated completion.
+        total_tokens:
+          type: integer
+          description: Total number of tokens used in the request.
     CompletionStreamResponse:
       type: object
       description: A streaming text completion chunk.
@@ -117,19 +130,6 @@ components:
                 - string
                 - 'null'
                 description: The finish reason, if applicable.
-    UsageStats:
-      type: object
-      description: Token usage statistics for the request.
-      properties:
-        prompt_tokens:
-          type: integer
-          description: Number of tokens in the prompt.
-        completion_tokens:
-          type: integer
-          description: Number of tokens in the generated completion.
-        total_tokens:
-          type: integer
-          description: Total number of tokens used in the request.
     CompletionRequest:
       type: object
       description: Request body for creating a text completion in OpenAI-compatible format.
