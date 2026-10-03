@@ -54,21 +54,38 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ToolCall:
+    ChatMessage:
       type: object
-      description: A tool call requested by the model during function calling.
+      description: A message in a chat conversation, containing a role, content, and optional images or tool calls.
+      required:
+      - role
+      - content
       properties:
-        function:
-          type: object
-          description: The function to call with its name and arguments.
-          properties:
-            name:
-              type: string
-              description: The name of the function to call.
-            arguments:
-              type: object
-              description: The arguments to pass to the function as key-value pairs.
-              additionalProperties: true
+        role:
+          type: string
+          description: The role of the message sender.
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+          description: The text content of the message.
+        thinking:
+          type: string
+          description: The thinking content when extended thinking is enabled.
+        images:
+          type: array
+          description: A list of base64-encoded images attached to the message for multimodal models.
+          items:
+            type: string
+            format: byte
+        tool_calls:
+          type: array
+          description: Tool calls requested by the assistant for function calling.
+          items:
+            $ref: '#/components/schemas/ToolCall'
     ModelOptions:
       type: object
       description: Runtime options that control text generation behavior. These override the model's default parameter values.
@@ -128,38 +145,38 @@ components:
         mirostat_eta:
           type: number
           description: Learning rate for Mirostat sampling.
-    ChatMessage:
+    Logprob:
       type: object
-      description: A message in a chat conversation, containing a role, content, and optional images or tool calls.
-      required:
-      - role
-      - content
+      description: Log probability information for a generated token.
       properties:
-        role:
+        token:
           type: string
-          description: The role of the message sender.
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
-          type: string
-          description: The text content of the message.
-        thinking:
-          type: string
-          description: The thinking content when extended thinking is enabled.
-        images:
+          description: The token text.
+        logprob:
+          type: number
+          description: The log probability of the token.
+        bytes:
           type: array
-          description: A list of base64-encoded images attached to the message for multimodal models.
+          description: The byte representation of the token.
           items:
-            type: string
-            format: byte
-        tool_calls:
+            type: integer
+        top_logprobs:
           type: array
-          description: Tool calls requested by the assistant for function calling.
+          description: The most likely alternative tokens and their log probabilities at this position.
           items:
-            $ref: '#/components/schemas/ToolCall'
+            type: object
+            properties:
+              token:
+                type: string
+                description: The alternative token text.
+              logprob:
+                type: number
+                description: The log probability of the alternative token.
+              bytes:
+                type: array
+                description: The byte representation of the alternative token.
+                items:
+                  type: integer
     ChatResponse:
       type: object
       description: Response object from a chat completion request. When streaming, partial objects are returned until done is true.
@@ -230,6 +247,21 @@ components:
               type: object
               description: A JSON Schema object defining the function parameters.
               additionalProperties: true
+    ToolCall:
+      type: object
+      description: A tool call requested by the model during function calling.
+      properties:
+        function:
+          type: object
+          description: The function to call with its name and arguments.
+          properties:
+            name:
+              type: string
+              description: The name of the function to call.
+            arguments:
+              type: object
+              description: The arguments to pass to the function as key-value pairs.
+              additionalProperties: true
     ChatRequest:
       type: object
       description: Request body for generating a chat completion from a conversation.
@@ -291,38 +323,6 @@ components:
         error:
           type: string
           description: A human-readable error message describing the problem.
-    Logprob:
-      type: object
-      description: Log probability information for a generated token.
-      properties:
-        token:
-          type: string
-          description: The token text.
-        logprob:
-          type: number
-          description: The log probability of the token.
-        bytes:
-          type: array
-          description: The byte representation of the token.
-          items:
-            type: integer
-        top_logprobs:
-          type: array
-          description: The most likely alternative tokens and their log probabilities at this position.
-          items:
-            type: object
-            properties:
-              token:
-                type: string
-                description: The alternative token text.
-              logprob:
-                type: number
-                description: The log probability of the alternative token.
-              bytes:
-                type: array
-                description: The byte representation of the alternative token.
-                items:
-                  type: integer
 externalDocs:
   description: Ollama API Documentation
   url: https://docs.ollama.com/api/introduction

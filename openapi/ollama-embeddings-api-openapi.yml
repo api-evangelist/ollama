@@ -166,13 +166,6 @@ components:
         mirostat_eta:
           type: number
           description: Learning rate for Mirostat sampling.
-    ErrorResponse:
-      type: object
-      description: An error response returned when a request fails.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message describing the problem.
     EmbedRequest:
       type: object
       description: Request body for generating vector embeddings from text.
@@ -204,19 +197,39 @@ components:
           - type: number
         options:
           $ref: '#/components/schemas/ModelOptions'
-    UsageStats:
+    ErrorResponse:
       type: object
-      description: Token usage statistics for the request.
+      description: An error response returned when a request fails.
       properties:
-        prompt_tokens:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
+    EmbeddingRequest:
+      type: object
+      description: Request body for creating embeddings in OpenAI-compatible format.
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          description: The model to use for embedding generation.
+        input:
+          description: Input text to embed. Can be a string or array of strings.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        encoding_format:
+          type: string
+          description: The format of the returned embeddings.
+          enum:
+          - float
+          - base64
+        dimensions:
           type: integer
-          description: Number of tokens in the prompt.
-        completion_tokens:
-          type: integer
-          description: Number of tokens in the generated completion.
-        total_tokens:
-          type: integer
-          description: Total number of tokens used in the request.
+          description: The number of dimensions for the output embeddings.
     EmbeddingResponse:
       type: object
       description: Response object from an embedding request.
@@ -248,32 +261,19 @@ components:
           description: The model used to generate the embeddings.
         usage:
           $ref: '#/components/schemas/UsageStats'
-    EmbeddingRequest:
+    UsageStats:
       type: object
-      description: Request body for creating embeddings in OpenAI-compatible format.
-      required:
-      - model
-      - input
+      description: Token usage statistics for the request.
       properties:
-        model:
-          type: string
-          description: The model to use for embedding generation.
-        input:
-          description: Input text to embed. Can be a string or array of strings.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        encoding_format:
-          type: string
-          description: The format of the returned embeddings.
-          enum:
-          - float
-          - base64
-        dimensions:
+        prompt_tokens:
           type: integer
-          description: The number of dimensions for the output embeddings.
+          description: Number of tokens in the prompt.
+        completion_tokens:
+          type: integer
+          description: Number of tokens in the generated completion.
+        total_tokens:
+          type: integer
+          description: Total number of tokens used in the request.
   securitySchemes:
     bearerAuth:
       type: http

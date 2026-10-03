@@ -267,6 +267,38 @@ paths:
       description: Local Ollama Server (OpenAI-compatible)
 components:
   schemas:
+    ChatMessage:
+      type: object
+      description: A message in a chat conversation, containing a role, content, and optional images or tool calls.
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          description: The role of the message sender.
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+          description: The text content of the message.
+        thinking:
+          type: string
+          description: The thinking content when extended thinking is enabled.
+        images:
+          type: array
+          description: A list of base64-encoded images attached to the message for multimodal models.
+          items:
+            type: string
+            format: byte
+        tool_calls:
+          type: array
+          description: Tool calls requested by the assistant for function calling.
+          items:
+            $ref: '#/components/schemas/ToolCall'
     DeleteRequest:
       type: object
       description: Request body for deleting a model from the local server.
@@ -276,6 +308,71 @@ components:
         model:
           type: string
           description: The name of the model to delete.
+    ToolCall:
+      type: object
+      description: A tool call requested by the model during function calling.
+      properties:
+        function:
+          type: object
+          description: The function to call with its name and arguments.
+          properties:
+            name:
+              type: string
+              description: The name of the function to call.
+            arguments:
+              type: object
+              description: The arguments to pass to the function as key-value pairs.
+              additionalProperties: true
+    ShowResponse:
+      type: object
+      description: Detailed information about a model including its configuration, capabilities, and metadata.
+      properties:
+        modelfile:
+          type: string
+          description: The Modelfile content used to create this model.
+        parameters:
+          type: string
+          description: The model parameters in string format.
+        template:
+          type: string
+          description: The prompt template used by the model.
+        system:
+          type: string
+          description: The system prompt embedded in the model.
+        license:
+          type: string
+          description: The license text for the model.
+        details:
+          $ref: '#/components/schemas/ModelDetails'
+        model_info:
+          type: object
+          description: Additional model metadata and architecture information.
+          additionalProperties: true
+        capabilities:
+          type: array
+          description: The list of capabilities the model supports, such as completion, tools, vision, and thinking.
+          items:
+            type: string
+    CopyRequest:
+      type: object
+      description: Request body for copying an existing model to a new name.
+      required:
+      - source
+      - destination
+      properties:
+        source:
+          type: string
+          description: The name of the existing model to copy from.
+        destination:
+          type: string
+          description: The name for the new model copy.
+    StatusResponse:
+      type: object
+      description: A status response returned for non-streaming model operations.
+      properties:
+        status:
+          type: string
+          description: The current status message.
     CreateRequest:
       type: object
       description: Request body for creating a new model from an existing model with optional customizations.
@@ -317,128 +414,6 @@ components:
           type: boolean
           description: When true, streams progress status events during creation.
           default: true
-    ToolCall:
-      type: object
-      description: A tool call requested by the model during function calling.
-      properties:
-        function:
-          type: object
-          description: The function to call with its name and arguments.
-          properties:
-            name:
-              type: string
-              description: The name of the function to call.
-            arguments:
-              type: object
-              description: The arguments to pass to the function as key-value pairs.
-              additionalProperties: true
-    CopyRequest:
-      type: object
-      description: Request body for copying an existing model to a new name.
-      required:
-      - source
-      - destination
-      properties:
-        source:
-          type: string
-          description: The name of the existing model to copy from.
-        destination:
-          type: string
-          description: The name for the new model copy.
-    ChatMessage:
-      type: object
-      description: A message in a chat conversation, containing a role, content, and optional images or tool calls.
-      required:
-      - role
-      - content
-      properties:
-        role:
-          type: string
-          description: The role of the message sender.
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
-          type: string
-          description: The text content of the message.
-        thinking:
-          type: string
-          description: The thinking content when extended thinking is enabled.
-        images:
-          type: array
-          description: A list of base64-encoded images attached to the message for multimodal models.
-          items:
-            type: string
-            format: byte
-        tool_calls:
-          type: array
-          description: Tool calls requested by the assistant for function calling.
-          items:
-            $ref: '#/components/schemas/ToolCall'
-    ShowResponse:
-      type: object
-      description: Detailed information about a model including its configuration, capabilities, and metadata.
-      properties:
-        modelfile:
-          type: string
-          description: The Modelfile content used to create this model.
-        parameters:
-          type: string
-          description: The model parameters in string format.
-        template:
-          type: string
-          description: The prompt template used by the model.
-        system:
-          type: string
-          description: The system prompt embedded in the model.
-        license:
-          type: string
-          description: The license text for the model.
-        details:
-          $ref: '#/components/schemas/ModelDetails'
-        model_info:
-          type: object
-          description: Additional model metadata and architecture information.
-          additionalProperties: true
-        capabilities:
-          type: array
-          description: The list of capabilities the model supports, such as completion, tools, vision, and thinking.
-          items:
-            type: string
-    ListResponse:
-      type: object
-      description: Response containing a list of all locally available models.
-      properties:
-        models:
-          type: array
-          description: The list of available models.
-          items:
-            $ref: '#/components/schemas/ModelSummary'
-    PullRequest:
-      type: object
-      description: Request body for downloading a model from the registry.
-      required:
-      - model
-      properties:
-        model:
-          type: string
-          description: The name of the model to download from the registry.
-        stream:
-          type: boolean
-          description: When true, streams progress status events during download.
-          default: true
-        insecure:
-          type: boolean
-          description: When true, allows downloading from registries using insecure HTTP connections.
-    StatusResponse:
-      type: object
-      description: A status response returned for non-streaming model operations.
-      properties:
-        status:
-          type: string
-          description: The current status message.
     PushRequest:
       type: object
       description: Request body for uploading a model to the registry.
@@ -455,18 +430,27 @@ components:
         insecure:
           type: boolean
           description: When true, allows uploading to registries using insecure HTTP connections.
-    ShowRequest:
+    ModelDetails:
       type: object
-      description: Request body for retrieving detailed model information.
-      required:
-      - model
+      description: Detailed metadata about a model's format and architecture.
       properties:
-        model:
+        format:
           type: string
-          description: The name of the model to show information for.
-        verbose:
-          type: boolean
-          description: When true, returns additional verbose metadata fields.
+          description: The file format of the model, such as gguf.
+        family:
+          type: string
+          description: The primary model family, such as llama or gemma.
+        families:
+          type: array
+          description: All model families this model belongs to.
+          items:
+            type: string
+        parameter_size:
+          type: string
+          description: The parameter count label, such as 7B or 13B.
+        quantization_level:
+          type: string
+          description: The quantization method used, such as Q4_0 or Q4_K_M.
     ModelSummary:
       type: object
       description: Summary information about a locally available model.
@@ -495,34 +479,6 @@ components:
           description: The SHA256 hash of the model contents.
         details:
           $ref: '#/components/schemas/ModelDetails'
-    ModelDetails:
-      type: object
-      description: Detailed metadata about a model's format and architecture.
-      properties:
-        format:
-          type: string
-          description: The file format of the model, such as gguf.
-        family:
-          type: string
-          description: The primary model family, such as llama or gemma.
-        families:
-          type: array
-          description: All model families this model belongs to.
-          items:
-            type: string
-        parameter_size:
-          type: string
-          description: The parameter count label, such as 7B or 13B.
-        quantization_level:
-          type: string
-          description: The quantization method used, such as Q4_0 or Q4_K_M.
-    ErrorResponse:
-      type: object
-      description: An error response returned when a request fails.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message describing the problem.
     StatusEvent:
       type: object
       description: A streaming status event returned during model creation, pull, or push operations.
@@ -539,6 +495,50 @@ components:
         completed:
           type: integer
           description: The number of bytes transferred so far.
+    ListResponse:
+      type: object
+      description: Response containing a list of all locally available models.
+      properties:
+        models:
+          type: array
+          description: The list of available models.
+          items:
+            $ref: '#/components/schemas/ModelSummary'
+    PullRequest:
+      type: object
+      description: Request body for downloading a model from the registry.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to download from the registry.
+        stream:
+          type: boolean
+          description: When true, streams progress status events during download.
+          default: true
+        insecure:
+          type: boolean
+          description: When true, allows downloading from registries using insecure HTTP connections.
+    ShowRequest:
+      type: object
+      description: Request body for retrieving detailed model information.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to show information for.
+        verbose:
+          type: boolean
+          description: When true, returns additional verbose metadata fields.
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
     ModelObject:
       type: object
       description: Information about a model in OpenAI-compatible format.
