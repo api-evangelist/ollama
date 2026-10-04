@@ -84,6 +84,37 @@ paths:
       description: Local Ollama Server (OpenAI-compatible)
 components:
   schemas:
+    EmbedRequest:
+      type: object
+      description: Request body for generating vector embeddings from text.
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          description: The name of the model to use for embedding generation.
+        input:
+          description: The text to generate embeddings for. Can be a single string or an array of strings for batch processing.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        truncate:
+          type: boolean
+          description: If true, truncates inputs that exceed the model's context window. If false, returns an error for oversized inputs.
+          default: true
+        dimensions:
+          type: integer
+          description: The number of dimensions for the output embeddings. Only supported by models that allow dimension reduction.
+        keep_alive:
+          description: How long the model stays loaded in memory after the request.
+          oneOf:
+          - type: string
+          - type: number
+        options:
+          $ref: '#/components/schemas/ModelOptions'
     EmbedResponse:
       type: object
       description: Response object from an embedding generation request containing the computed vectors.
@@ -107,6 +138,13 @@ components:
         prompt_eval_count:
           type: integer
           description: Number of input tokens processed to generate the embeddings.
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
     ModelOptions:
       type: object
       description: Runtime options that control text generation behavior. These override the model's default parameter values.
@@ -166,70 +204,6 @@ components:
         mirostat_eta:
           type: number
           description: Learning rate for Mirostat sampling.
-    EmbedRequest:
-      type: object
-      description: Request body for generating vector embeddings from text.
-      required:
-      - model
-      - input
-      properties:
-        model:
-          type: string
-          description: The name of the model to use for embedding generation.
-        input:
-          description: The text to generate embeddings for. Can be a single string or an array of strings for batch processing.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        truncate:
-          type: boolean
-          description: If true, truncates inputs that exceed the model's context window. If false, returns an error for oversized inputs.
-          default: true
-        dimensions:
-          type: integer
-          description: The number of dimensions for the output embeddings. Only supported by models that allow dimension reduction.
-        keep_alive:
-          description: How long the model stays loaded in memory after the request.
-          oneOf:
-          - type: string
-          - type: number
-        options:
-          $ref: '#/components/schemas/ModelOptions'
-    ErrorResponse:
-      type: object
-      description: An error response returned when a request fails.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message describing the problem.
-    EmbeddingRequest:
-      type: object
-      description: Request body for creating embeddings in OpenAI-compatible format.
-      required:
-      - model
-      - input
-      properties:
-        model:
-          type: string
-          description: The model to use for embedding generation.
-        input:
-          description: Input text to embed. Can be a string or array of strings.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        encoding_format:
-          type: string
-          description: The format of the returned embeddings.
-          enum:
-          - float
-          - base64
-        dimensions:
-          type: integer
-          description: The number of dimensions for the output embeddings.
     EmbeddingResponse:
       type: object
       description: Response object from an embedding request.
@@ -261,6 +235,32 @@ components:
           description: The model used to generate the embeddings.
         usage:
           $ref: '#/components/schemas/UsageStats'
+    EmbeddingRequest:
+      type: object
+      description: Request body for creating embeddings in OpenAI-compatible format.
+      required:
+      - model
+      - input
+      properties:
+        model:
+          type: string
+          description: The model to use for embedding generation.
+        input:
+          description: Input text to embed. Can be a string or array of strings.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        encoding_format:
+          type: string
+          description: The format of the returned embeddings.
+          enum:
+          - float
+          - base64
+        dimensions:
+          type: integer
+          description: The number of dimensions for the output embeddings.
     UsageStats:
       type: object
       description: Token usage statistics for the request.

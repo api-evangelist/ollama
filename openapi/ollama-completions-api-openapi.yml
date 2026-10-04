@@ -47,39 +47,6 @@ paths:
           description: Model not found
 components:
   schemas:
-    CompletionStreamResponse:
-      type: object
-      description: A streaming text completion chunk.
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the completion.
-        object:
-          type: string
-          description: The object type.
-        created:
-          type: integer
-          description: Unix timestamp of creation.
-        model:
-          type: string
-          description: The model used.
-        choices:
-          type: array
-          description: A list of completion chunk choices.
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-                description: The index of the choice.
-              text:
-                type: string
-                description: The text delta.
-              finish_reason:
-                type:
-                - string
-                - 'null'
-                description: The finish reason, if applicable.
     CompletionResponse:
       type: object
       description: Response object from a text completion request.
@@ -117,6 +84,39 @@ components:
                 - length
         usage:
           $ref: '#/components/schemas/UsageStats'
+    CompletionStreamResponse:
+      type: object
+      description: A streaming text completion chunk.
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the completion.
+        object:
+          type: string
+          description: The object type.
+        created:
+          type: integer
+          description: Unix timestamp of creation.
+        model:
+          type: string
+          description: The model used.
+        choices:
+          type: array
+          description: A list of completion chunk choices.
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+                description: The index of the choice.
+              text:
+                type: string
+                description: The text delta.
+              finish_reason:
+                type:
+                - string
+                - 'null'
+                description: The finish reason, if applicable.
     CompletionRequest:
       type: object
       description: Request body for creating a text completion in OpenAI-compatible format.
