@@ -659,6 +659,9 @@ accessModel:
 image: https://ollama.ai/public/ollama.png
 access: 3rd-Party
 common:
+  - type: CapabilityMap
+    url: capabilities/ollama-capability-edges.yml
+    name: Ollama Business Capability Map
   - type: AgenticAccess
     url: agentic-access/ollama-agentic-access.yml
   - type: DomainSecurity

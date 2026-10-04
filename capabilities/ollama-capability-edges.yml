@@ -1,0 +1,55 @@
+slug: ollama
+provider: Ollama
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Chat
+  spec_file: ollama-chat-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /api/chat generateChatCompletion  Ollama Generate a chat completion; schemas ChatRequest,
+    ToolDefinition, ToolCall
+  reason: Serving LLM chat inference from locally running models; the closest honest fit is AI/ML model
+    lifecycle and operation under Information & Data Management. Inference serving rather than full model
+    lifecycle, hence moderate confidence.
+- tag: Chat Completions
+  spec_file: ollama-chat-completions-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /chat/completions createChatCompletion; schemas ChatCompletionRequest, OpenAIToolDefinition,
+    UsageStats
+  reason: OpenAI-compatible chat completion inference endpoint for local models — AI model serving/operation.
+    Not a customer-service or messaging capability despite the 'Chat' tag.
+- tag: Completions
+  spec_file: ollama-completions-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /completions createCompletion; schemas CompletionRequest, CompletionStreamResponse
+  reason: Text-generation inference against locally hosted language models, mapping to AI/ML model operation.
+    Moderate confidence as it is inference execution rather than lifecycle governance.
+- tag: Embeddings
+  spec_file: ollama-embeddings-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /api/embed generateEmbeddings  Ollama Generate embeddings; schemas EmbedRequest, EmbeddingResponse
+  reason: Generates vector embeddings from language models — AI/ML inference capability. Mapped to Artificial
+    Intelligence Management as the only fitting candidate; confidence moderate given it is a model-serving
+    primitive.
