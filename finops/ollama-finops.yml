@@ -130,13 +130,10 @@ apis:
 unitEconomics:
   - name: Cloud cost per active developer
     metric: cloud_subscription_cost / active_developers_using_cloud
-    target: '$20-100/mo per developer based on tier'
   - name: Local cost per inference
     metric: (gpu_amortization + electricity) / local_inference_requests
-    target: minimize via batching
   - name: Cloud GPU-time efficiency
     metric: cloud_gpu_time / cloud_useful_completions
-    target: monitor weekly against tier ceiling
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
