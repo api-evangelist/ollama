@@ -267,38 +267,51 @@ paths:
       description: Local Ollama Server (OpenAI-compatible)
 components:
   schemas:
-    ChatMessage:
+    CopyRequest:
       type: object
-      description: A message in a chat conversation, containing a role, content, and optional images or tool calls.
+      description: Request body for copying an existing model to a new name.
       required:
-      - role
-      - content
+      - source
+      - destination
       properties:
-        role:
+        source:
           type: string
-          description: The role of the message sender.
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-        content:
+          description: The name of the existing model to copy from.
+        destination:
           type: string
-          description: The text content of the message.
-        thinking:
+          description: The name for the new model copy.
+    StatusEvent:
+      type: object
+      description: A streaming status event returned during model creation, pull, or push operations.
+      properties:
+        status:
           type: string
-          description: The thinking content when extended thinking is enabled.
-        images:
-          type: array
-          description: A list of base64-encoded images attached to the message for multimodal models.
-          items:
-            type: string
-            format: byte
-        tool_calls:
-          type: array
-          description: Tool calls requested by the assistant for function calling.
-          items:
-            $ref: '#/components/schemas/ToolCall'
+          description: A human-readable status message describing the current operation step.
+        digest:
+          type: string
+          description: The content digest associated with the current status, if applicable.
+        total:
+          type: integer
+          description: The total number of bytes expected for the operation.
+        completed:
+          type: integer
+          description: The number of bytes transferred so far.
+    PullRequest:
+      type: object
+      description: Request body for downloading a model from the registry.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to download from the registry.
+        stream:
+          type: boolean
+          description: When true, streams progress status events during download.
+          default: true
+        insecure:
+          type: boolean
+          description: When true, allows downloading from registries using insecure HTTP connections.
     DeleteRequest:
       type: object
       description: Request body for deleting a model from the local server.
@@ -308,21 +321,22 @@ components:
         model:
           type: string
           description: The name of the model to delete.
-    ToolCall:
+    PushRequest:
       type: object
-      description: A tool call requested by the model during function calling.
+      description: Request body for uploading a model to the registry.
+      required:
+      - model
       properties:
-        function:
-          type: object
-          description: The function to call with its name and arguments.
-          properties:
-            name:
-              type: string
-              description: The name of the function to call.
-            arguments:
-              type: object
-              description: The arguments to pass to the function as key-value pairs.
-              additionalProperties: true
+        model:
+          type: string
+          description: The name of the model to upload to the registry.
+        stream:
+          type: boolean
+          description: When true, streams progress status events during upload.
+          default: true
+        insecure:
+          type: boolean
+          description: When true, allows uploading to registries using insecure HTTP connections.
     ShowResponse:
       type: object
       description: Detailed information about a model including its configuration, capabilities, and metadata.
@@ -353,26 +367,21 @@ components:
           description: The list of capabilities the model supports, such as completion, tools, vision, and thinking.
           items:
             type: string
-    CopyRequest:
+    ToolCall:
       type: object
-      description: Request body for copying an existing model to a new name.
-      required:
-      - source
-      - destination
+      description: A tool call requested by the model during function calling.
       properties:
-        source:
-          type: string
-          description: The name of the existing model to copy from.
-        destination:
-          type: string
-          description: The name for the new model copy.
-    StatusResponse:
-      type: object
-      description: A status response returned for non-streaming model operations.
-      properties:
-        status:
-          type: string
-          description: The current status message.
+        function:
+          type: object
+          description: The function to call with its name and arguments.
+          properties:
+            name:
+              type: string
+              description: The name of the function to call.
+            arguments:
+              type: object
+              description: The arguments to pass to the function as key-value pairs.
+              additionalProperties: true
     CreateRequest:
       type: object
       description: Request body for creating a new model from an existing model with optional customizations.
@@ -414,22 +423,15 @@ components:
           type: boolean
           description: When true, streams progress status events during creation.
           default: true
-    PushRequest:
+    ListResponse:
       type: object
-      description: Request body for uploading a model to the registry.
-      required:
-      - model
+      description: Response containing a list of all locally available models.
       properties:
-        model:
-          type: string
-          description: The name of the model to upload to the registry.
-        stream:
-          type: boolean
-          description: When true, streams progress status events during upload.
-          default: true
-        insecure:
-          type: boolean
-          description: When true, allows uploading to registries using insecure HTTP connections.
+        models:
+          type: array
+          description: The list of available models.
+          items:
+            $ref: '#/components/schemas/ModelSummary'
     ModelDetails:
       type: object
       description: Detailed metadata about a model's format and architecture.
@@ -451,6 +453,57 @@ components:
         quantization_level:
           type: string
           description: The quantization method used, such as Q4_0 or Q4_K_M.
+    ErrorResponse:
+      type: object
+      description: An error response returned when a request fails.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message describing the problem.
+    ChatMessage:
+      type: object
+      description: A message in a chat conversation, containing a role, content, and optional images or tool calls.
+      required:
+      - role
+      - content
+      properties:
+        role:
+          type: string
+          description: The role of the message sender.
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+        content:
+          type: string
+          description: The text content of the message.
+        thinking:
+          type: string
+          description: The thinking content when extended thinking is enabled.
+        images:
+          type: array
+          description: A list of base64-encoded images attached to the message for multimodal models.
+          items:
+            type: string
+            format: byte
+        tool_calls:
+          type: array
+          description: Tool calls requested by the assistant for function calling.
+          items:
+            $ref: '#/components/schemas/ToolCall'
+    ShowRequest:
+      type: object
+      description: Request body for retrieving detailed model information.
+      required:
+      - model
+      properties:
+        model:
+          type: string
+          description: The name of the model to show information for.
+        verbose:
+          type: boolean
+          description: When true, returns additional verbose metadata fields.
     ModelSummary:
       type: object
       description: Summary information about a locally available model.
@@ -479,66 +532,26 @@ components:
           description: The SHA256 hash of the model contents.
         details:
           $ref: '#/components/schemas/ModelDetails'
-    StatusEvent:
+    StatusResponse:
       type: object
-      description: A streaming status event returned during model creation, pull, or push operations.
+      description: A status response returned for non-streaming model operations.
       properties:
         status:
           type: string
-          description: A human-readable status message describing the current operation step.
-        digest:
-          type: string
-          description: The content digest associated with the current status, if applicable.
-        total:
-          type: integer
-          description: The total number of bytes expected for the operation.
-        completed:
-          type: integer
-          description: The number of bytes transferred so far.
-    ListResponse:
+          description: The current status message.
+    ModelListResponse:
       type: object
-      description: Response containing a list of all locally available models.
+      description: Response containing a list of available models in OpenAI format.
       properties:
-        models:
+        object:
+          type: string
+          description: The object type, always list.
+          const: list
+        data:
           type: array
-          description: The list of available models.
+          description: The list of model objects.
           items:
-            $ref: '#/components/schemas/ModelSummary'
-    PullRequest:
-      type: object
-      description: Request body for downloading a model from the registry.
-      required:
-      - model
-      properties:
-        model:
-          type: string
-          description: The name of the model to download from the registry.
-        stream:
-          type: boolean
-          description: When true, streams progress status events during download.
-          default: true
-        insecure:
-          type: boolean
-          description: When true, allows downloading from registries using insecure HTTP connections.
-    ShowRequest:
-      type: object
-      description: Request body for retrieving detailed model information.
-      required:
-      - model
-      properties:
-        model:
-          type: string
-          description: The name of the model to show information for.
-        verbose:
-          type: boolean
-          description: When true, returns additional verbose metadata fields.
-    ErrorResponse:
-      type: object
-      description: An error response returned when a request fails.
-      properties:
-        error:
-          type: string
-          description: A human-readable error message describing the problem.
+            $ref: '#/components/schemas/ModelObject'
     ModelObject:
       type: object
       description: Information about a model in OpenAI-compatible format.
@@ -556,19 +569,6 @@ components:
         owned_by:
           type: string
           description: The organization that owns the model. Defaults to library.
-    ModelListResponse:
-      type: object
-      description: Response containing a list of available models in OpenAI format.
-      properties:
-        object:
-          type: string
-          description: The object type, always list.
-          const: list
-        data:
-          type: array
-          description: The list of model objects.
-          items:
-            $ref: '#/components/schemas/ModelObject'
   securitySchemes:
     bearerAuth:
       type: http
