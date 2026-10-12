@@ -1,0 +1,146 @@
+openapi: 3.1.0
+info:
+  title: Ollama System One Decision API
+  version: 0.35.1
+  description: 'Ollama /v1/systemone: decision models (Nimble, Tev1, Clef, Clef Flash) return choices,
+    probabilities and scores instead of text. Added in v0.35.0; image input for Clef models in v0.35.1.
+    Authored by API Evangelist from Ollama release notes, docs and Go wire types; Ollama does not publish
+    an OpenAPI for it.'
+  x-generated-from: documentation
+  x-derived-from:
+  - https://github.com/ollama/ollama/releases/tag/v0.35.0
+  - https://github.com/ollama/ollama/releases/tag/v0.35.1
+  - https://github.com/ollama/ollama/blob/c1c536297f5bdbb3aef028df6f09bf81cf260497/docs/capabilities/decision.mdx
+  - https://github.com/ollama/ollama/blob/c1c536297f5bdbb3aef028df6f09bf81cf260497/decision/types.go
+  x-ae-authored:
+    by: API Evangelist
+    date: '2026-10-12'
+    source_commit: c1c536297f5bdbb3aef028df6f09bf81cf260497
+    method: Field names and types transcribed from decision/types.go (Request, Question, Response, Usage,
+      NoulAnswer, ChoiceAnswer, ScoreAnswer); constraints and descriptions from docs/capabilities/decision.mdx.
+servers:
+- url: http://localhost:11434
+tags:
+- name: Decision Models
+paths:
+  /v1/systemone:
+    post:
+      operationId: systemone
+      summary: Evaluate questions with a decision model
+      tags:
+      - Decision Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SystemOneRequest'
+      responses:
+        '200':
+          description: Answers keyed by question id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemOneResponse'
+components:
+  schemas:
+    SystemOneRequest:
+      type: object
+      required:
+      - model
+      - state
+      - questions
+      properties:
+        model:
+          type: string
+          description: Decision model, e.g. nimble, tev1, clef, clef-flash.
+        state:
+          description: 'Required context: string or structured data.'
+        images:
+          type: array
+          items:
+            type: string
+            contentEncoding: base64
+          description: Base64 PNG/JPEG/WebP (Clef models, v0.35.1+). URLs and data URLs not accepted.
+        videos:
+          type: array
+          items: {}
+        questions:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Question'
+        keep_alive:
+          description: Ollama duration (string or number).
+    Question:
+      type: object
+      required:
+      - type
+      - instructions
+      properties:
+        type:
+          type: string
+          enum:
+          - choice
+          - noul
+          - score
+        instructions:
+          description: 'The question: a string or structured data.'
+        criteria:
+          description: 'choice: 2-26 named options with descriptions; noul: descriptions for "false" and
+            "true"; score: 2-10 descriptions ordered lowest to highest.'
+    SystemOneResponse:
+      type: object
+      properties:
+        model:
+          type: string
+        answers:
+          type: object
+          additionalProperties:
+            oneOf:
+            - title: NoulAnswer
+              type: object
+              properties:
+                type:
+                  type: string
+                  const: noul
+                noul:
+                  type: number
+            - title: ChoiceAnswer
+              type: object
+              properties:
+                type:
+                  type: string
+                  const: choice
+                choice:
+                  type: string
+                probabilities:
+                  type: object
+                  additionalProperties:
+                    type: number
+                confidence:
+                  type: number
+            - title: ScoreAnswer
+              type: object
+              properties:
+                type:
+                  type: string
+                  const: score
+                score:
+                  type: number
+                legend:
+                  type: object
+                probabilities:
+                  type: object
+                  additionalProperties:
+                    type: number
+                confidence:
+                  type: number
+        usage:
+          type: object
+          properties:
+            input_tokens:
+              type: integer
+            output_tokens:
+              type: integer
+        prompt_eval_cached_count:
+          type: integer

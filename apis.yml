@@ -1,6 +1,24 @@
 aid: ollama
 url: https://raw.githubusercontent.com/api-evangelist/ollama/refs/heads/main/apis.yml
 apis:
+- aid: ollama:ollama-systemone-decision-api
+  name: Ollama System One Decision API
+  tags:
+  - Decision Models
+  - LLM
+  humanURL: https://docs.ollama.com/capabilities/decision
+  baseURL: http://localhost:11434
+  description: >-
+    Ollama's /v1/systemone endpoint (v0.35.0+) for decision models such as Nimble, Tev1, Clef and
+    Clef Flash, returning choices, probabilities and scores instead of text.
+  properties:
+  - type: Documentation
+    url: https://github.com/ollama/ollama/blob/main/docs/capabilities/decision.mdx
+  - type: ChangeLog
+    url: https://github.com/ollama/ollama/releases/tag/v0.35.0
+  - type: OpenAPI
+    url: openapi/_ae-authored/ollama-systemone-decision-api-openapi.yml
+    description: AE-authored from Ollama docs and decision/types.go (x-generated-from documentation).
 - aid: ollama:ollama-openai-compatibility-api
   name: Ollama OpenAI Compatibility API
   tags:
