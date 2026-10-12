@@ -1,0 +1,23 @@
+generated: '2026-10-12'
+method: searched
+edges:
+- partner_name: TypeSafe AI
+  partner: typesafe-ai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/ollama/ollama/releases/tag/v0.35.0
+  contract_reference:
+    repo: ollama
+    spec_file: ollama-v0.35.0-release-notes.md
+    value: /v1/systemone
+    property: paths
+    note: 'ollama declares TypeSafe compatibility: ''Ollama now supports decision models through `/v1/systemone`, based on
+      [TypeSafe’s Jev API](https://typesafe.ai).'''
+    detected_by: frontier-decision-models.py (2026-10-12)
+    detected: '2026-10-12'
+checked:
+- https://github.com/api-evangelist/ollama/blob/main/evidence/compatibility/ollama-v0.35.0-release-notes.md
+- https://github.com/ollama/ollama/releases/tag/v0.35.0

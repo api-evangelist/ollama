@@ -1,0 +1,11 @@
+fetched: '2026-10-12'
+method: fetched
+source: https://api.github.com/repos/ollama/ollama/releases/tags/v0.35.0
+page: https://github.com/ollama/ollama/releases/tag/v0.35.0
+file: ollama-v0.35.0-release-notes.md
+bytes: 1973
+sha256: 3a6da7c1c8be391255222ce47a0c0739761a7c28cc623ce014c2fcb4150397d4
+anchor: typesafe-ai
+classification: declares-compatibility
+quote: Ollama now supports decision models through `/v1/systemone`, based on TypeSafe's Jev API
+note: release body field from the GitHub releases API, CRLF normalised to LF, otherwise verbatim
