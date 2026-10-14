@@ -74,8 +74,30 @@ edges:
     detected: '2026-10-13'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
+- partner_name: Visual Studio Code Marketplace
+  partner: vs-code-marketplace
+  partner_match: aggregator
+  type: marketplace
+  marketplace: vscode
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.visualstudio.com/publishers/Ollama
+  listing_count: 1
+  apps:
+  - Ollama
+  publisher_name: Ollama
+  badges:
+  - Verified publisher
+  - Verified domain
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 checked:
 - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
 - https://github.com/Portkey-AI/gateway/tree/main/src/providers
 - https://github.com/api-evangelist/ollama/blob/main/evidence/compatibility/ollama-v0.35.0-release-notes.md
 - https://github.com/ollama/ollama/releases/tag/v0.35.0
+- https://marketplace.visualstudio.com/vscode
+marketplace_apps: []
+source:
+- https://marketplace.visualstudio.com/vscode
