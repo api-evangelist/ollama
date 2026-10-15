@@ -23,6 +23,18 @@
     detected: '2026-10-12'
   status: not-a-workflow
   arazzo: null
+- slug: ollama-visual-studio-code-marketplace
+  label: Visual Studio Code Marketplace
+  partner: vs-code-marketplace
+  partner_name: Visual Studio Code Marketplace
+  type: marketplace
+  marketplace: vscode
+  channel: partner-built
+  evidence: https://marketplace.visualstudio.com/publishers/Ollama
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: ollama-litellm
   label: LiteLLM
   partner: litellm
@@ -61,19 +73,7 @@
     value: OpenAI-compatible
     note: 'ollama declares OpenAI compatibility: ''title: Ollama OpenAI Compatibility Chat Completions API'''
     detected_by: sweep-model-routing.py
-    detected: '2026-10-13'
-  status: not-a-workflow
-  arazzo: null
-- slug: ollama-visual-studio-code-marketplace
-  label: Visual Studio Code Marketplace
-  partner: vs-code-marketplace
-  partner_name: Visual Studio Code Marketplace
-  type: marketplace
-  marketplace: vscode
-  channel: partner-built
-  evidence: https://marketplace.visualstudio.com/publishers/Ollama
-  source: edge
-  relationship: platform-app
+    detected: '2026-10-15'
   status: not-a-workflow
   arazzo: null
 - slug: ollama-llamaindex
@@ -97,4 +97,30 @@
   source: edge
   relationship: system-coverage
   status: not-a-workflow
+  arazzo: null
+- slug: ollama-pipedream
+  label: Pipedream
+  partner: pipedream
+  partner_name: Pipedream
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/ollama
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: ollama
+    matched_domain: ollama.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: ollama
+    actions: true
+    sources: false
+    builder: Pipedream repo (component)
+  status: pending-generation
   arazzo: null

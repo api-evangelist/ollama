@@ -18,6 +18,24 @@ edges:
       based on [TypeSafe’s Jev API](https://typesafe.ai).'''
     detected_by: frontier-decision-models.py (2026-10-12)
     detected: '2026-10-12'
+- partner_name: Visual Studio Code Marketplace
+  partner: vs-code-marketplace
+  partner_match: aggregator
+  type: marketplace
+  marketplace: vscode
+  channel: partner-built
+  relationship: platform-app
+  direction: third-party
+  evidence: https://marketplace.visualstudio.com/publishers/Ollama
+  listing_count: 1
+  apps:
+  - Ollama
+  publisher_name: Ollama
+  badges:
+  - Verified publisher
+  - Verified domain
+  detected_by: sweep-devtools.py
+  detected: '2026-10-14'
 - partner_name: LiteLLM
   partner: litellm
   partner_match: router
@@ -71,27 +89,9 @@ edges:
     value: OpenAI-compatible
     note: 'ollama declares OpenAI compatibility: ''title: Ollama OpenAI Compatibility Chat Completions API'''
     detected_by: sweep-model-routing.py
-    detected: '2026-10-13'
+    detected: '2026-10-15'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
-- partner_name: Visual Studio Code Marketplace
-  partner: vs-code-marketplace
-  partner_match: aggregator
-  type: marketplace
-  marketplace: vscode
-  channel: partner-built
-  relationship: platform-app
-  direction: third-party
-  evidence: https://marketplace.visualstudio.com/publishers/Ollama
-  listing_count: 1
-  apps:
-  - Ollama
-  publisher_name: Ollama
-  badges:
-  - Verified publisher
-  - Verified domain
-  detected_by: sweep-devtools.py
-  detected: '2026-10-14'
 - partner_name: LlamaIndex
   partner: llamaindex
   partner_match: framework
@@ -130,8 +130,35 @@ edges:
   matched_by: verified-domain-table
   detected_by: sweep-rag-vector.py
   first_seen: '2026-10-15'
+- partner_name: Pipedream
+  partner: pipedream
+  partner_match: aggregator
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/ollama
+  category: null
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: ollama
+    matched_domain: ollama.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: ollama
+    actions: true
+    sources: false
+    builder: Pipedream repo (component)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
 checked:
 - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
+- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://github.com/Portkey-AI/gateway/tree/main/src/providers
 - https://github.com/api-evangelist/ollama/blob/main/evidence/compatibility/ollama-v0.35.0-release-notes.md
 - https://github.com/langchain-ai/langchain/tree/master/libs/partners
