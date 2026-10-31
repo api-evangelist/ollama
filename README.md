@@ -1,4 +1,4 @@
-# Ollama (ollama)
+# Ollama
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,195 +66,144 @@
 
 API for running large language models locally.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/ollama/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/ollama/refs/heads/main/apis.yml)
+**Areas:** LLM · Ollama · Artificial Intelligence · Models
 
-## Scope
+## Ollama on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Ollama is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ollama/](https://apis.io/providers/ollama/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (14)
 
-- Artificial Intelligence
-- Large Language Models
-- Models
+- [Ollama System One Decision API](https://apis.io/apis/ollama/ollama-systemone-decision-api/) — Ollama's /v1/systemone endpoint (v0.35.0+) for decision models such as Nimble, Tev1, Clef and Clef Flash, returning choices, probabilities and scores…
+- [Ollama OpenAI Compatibility API](https://apis.io/apis/ollama/ollama-openai-compatibility-api/) — Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for OpenAI to connect to locally-running models through…
+- [Ollama Anthropic Compatibility API](https://apis.io/apis/ollama/ollama-anthropic-compatibility-api/) — Ollama provides compatibility with the Anthropic Messages API, enabling tools like Claude Code to work with locally-running open-source models. Supports…
+- [Ollama Cloud API](https://apis.io/apis/ollama/ollama-cloud-api/) — Ollama Cloud provides cloud-hosted inference for large language models, giving access to larger models and faster responses without requiring a powerful…
+- [Ollama Blobs API](https://apis.io/apis/ollama/ollama-blobs-api/) — Manage binary large objects used by models.
+- [Ollama Chat Completions API](https://apis.io/apis/ollama/ollama-chat-completions-api/) — Generate chat completions using the OpenAI-compatible chat endpoint with multi-turn conversation support.
+- [Ollama Completions API](https://apis.io/apis/ollama/ollama-completions-api/) — Generate text completions using the OpenAI-compatible completions endpoint.
+- [Ollama Embeddings API](https://apis.io/apis/ollama/ollama-embeddings-api/) — Generate vector embeddings from text input.
+- [Ollama Generate API](https://apis.io/apis/ollama/ollama-generate-api/) — Generate text completions from a prompt using a specified model.
+- [Ollama Images API](https://apis.io/apis/ollama/ollama-images-api/) — Generate images from text descriptions using the OpenAI-compatible images endpoint. Experimental feature.
+- [Ollama Models API](https://apis.io/apis/ollama/ollama-models-api/) — List, show, create, copy, pull, push, and delete models.
+- [Ollama Responses API](https://apis.io/apis/ollama/ollama-responses-api/) — Generate structured responses with optional reasoning using the OpenAI-compatible Responses API.
+- [Ollama Running Models API](https://apis.io/apis/ollama/ollama-running-models-api/) — View models currently loaded in memory and their resource usage.
+- [Ollama Version API](https://apis.io/apis/ollama/ollama-version-api/) — Retrieve the Ollama server version.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-11-19
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Ollama API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Ollama provides a REST API for running and managing large language models locally. The API supports text generation, chat completions, embeddings, model management, and streaming responses. It serves as the primary interface for interacting with models running on the Ollama inference engine at localhost:11434.
+- [Ollama Agentic Access](https://apis.io/agentic-access/ollama/ollama-agentic-access/)
 
-- **Human URL:** [https://docs.ollama.com/api/introduction](https://docs.ollama.com/api/introduction)
-- **Base URL:** `http://localhost:11434/api`
+#### Collections (13)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Inference
-- Large Language Models
-- Local AI
-- Models
+- [Ollama API](https://apis.io/collections/ollama/open-ollama-api/)
+- [Ollama Blobs API](https://apis.io/collections/ollama/open-ollama-blobs-api/)
+- [Ollama Blobs Chat API](https://apis.io/collections/ollama/open-ollama-chat-api/)
+- [Ollama Blobs Chat Completions API](https://apis.io/collections/ollama/open-ollama-chat-completions-api/)
+- [Ollama Blobs Completions API](https://apis.io/collections/ollama/open-ollama-completions-api/)
+- [Ollama Blobs Embeddings API](https://apis.io/collections/ollama/open-ollama-embeddings-api/)
+- [Ollama Blobs Generate API](https://apis.io/collections/ollama/open-ollama-generate-api/)
+- [Ollama Blobs Images API](https://apis.io/collections/ollama/open-ollama-images-api/)
+- [Ollama Blobs Models API](https://apis.io/collections/ollama/open-ollama-models-api/)
+- [Ollama OpenAI Compatibility API](https://apis.io/collections/ollama/open-ollama-openai-compatibility-api/)
+- [Ollama Blobs Responses API](https://apis.io/collections/ollama/open-ollama-responses-api/)
+- [Ollama Blobs Running Models API](https://apis.io/collections/ollama/open-ollama-running-models-api/)
+- [Ollama Blobs Version API](https://apis.io/collections/ollama/open-ollama-version-api/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://docs.ollama.com/)
-- [OpenAPI](https://docs.ollama.com/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://docs.ollama.com/api/introduction)
-- [Authentication](https://docs.ollama.com/api/authentication)
-- [Documentation](https://docs.ollama.com/api/generate)
-- [Documentation](https://docs.ollama.com/api/chat)
-- [Documentation](https://docs.ollama.com/api/embed)
-- [Documentation](https://docs.ollama.com/api/tags)
-- [Documentation](https://docs.ollama.com/api/ps)
-- [Documentation](https://docs.ollama.com/api/create)
-- [Documentation](https://docs.ollama.com/api/pull)
-- [Documentation](https://docs.ollama.com/api/push)
-- [Documentation](https://docs.ollama.com/api/copy)
-- [Documentation](https://docs.ollama.com/api/delete)
-- [Documentation](https://docs.ollama.com/api/show)
-- [Documentation](https://docs.ollama.com/api/streaming)
-- [Documentation](https://docs.ollama.com/api/errors)
-- [Documentation](https://docs.ollama.com/api/usage)
-- [Documentation](https://docs.ollama.com/api/blobs)
-- [Documentation](https://docs.ollama.com/api/version)
-- [Postman Collection](collections/ollama-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/ollama-openai-compatibility-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-openai-compatibility-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Ollama OpenAI Compatibility API
+- [Ollama Authentication](https://apis.io/security/ollama/ollama-authentication/)
+- [Ollama Domain Security](https://apis.io/security/ollama/ollama-domain-security/)
 
-Ollama provides compatibility with parts of the OpenAI API, allowing existing applications built for OpenAI to connect to locally-running models through Ollama. Supported endpoints include chat completions, completions, embeddings, models, and the Responses API.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://docs.ollama.com/api/openai-compatibility](https://docs.ollama.com/api/openai-compatibility)
-- **Base URL:** `http://localhost:11434/v1`
+Published plans, tiers and prices.
 
-#### Tags
+- [Ollama Plans Pricing](https://apis.io/plans/ollama/ollama-plans-pricing/)
 
-- Chat
-- Compatibility
-- Large Language Models
-- OpenAI
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://docs.ollama.com/api/openai-compatibility)
-- [Blog](https://ollama.com/blog/openai-compatibility)
-- [Blog R S S](https://ollama.com/blog/rss.xml)
-- [Postman Collection](collections/ollama-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/ollama-openai-compatibility-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-openai-compatibility-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Ollama Rate Limits](https://apis.io/rate-limits/ollama/ollama-rate-limits/)
 
-### Ollama Anthropic Compatibility API
+#### FinOps (1)
 
-Ollama provides compatibility with the Anthropic Messages API, enabling tools like Claude Code to work with locally-running open-source models. Supports messages, streaming, system prompts, tool calling, extended thinking, and vision input.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://docs.ollama.com/api/anthropic-compatibility](https://docs.ollama.com/api/anthropic-compatibility)
-- **Base URL:** `http://localhost:11434`
+- [Ollama Finops](https://apis.io/finops/ollama/ollama-finops/)
 
-#### Tags
+## Where to find this API
 
-- Anthropic
-- Chat
-- Compatibility
-- Large Language Models
-
-#### Properties
-
-- [Documentation](https://docs.ollama.com/api/anthropic-compatibility)
-- [Blog](https://ollama.com/blog/claude)
-- [Postman Collection](collections/ollama-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/ollama-openai-compatibility-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-openai-compatibility-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Ollama Cloud API
-
-Ollama Cloud provides cloud-hosted inference for large language models, giving access to larger models and faster responses without requiring a powerful local GPU. Cloud models are accessed through the same API interface as local models, with requests encrypted in transit and no storage of prompts or outputs.
-
-- **Human URL:** [https://docs.ollama.com/cloud](https://docs.ollama.com/cloud)
-- **Base URL:** `https://ollama.com/api`
-
-#### Tags
-
-- Cloud
-- Inference
-- Large Language Models
-
-#### Properties
-
-- [Documentation](https://docs.ollama.com/cloud)
-- [Getting Started](https://ollama.com/cloud)
-- [Pricing](https://ollama.com/pricing)
-- [Authentication](https://ollama.com/settings/keys)
-- [Models](https://ollama.com/search?c=cloud)
-- [Postman Collection](collections/ollama-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/ollama-openai-compatibility-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ollama-openai-compatibility-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://ollama.com/)
 - [Documentation](https://docs.ollama.com/)
-- [F A Q](https://docs.ollama.com/faq)
-- [Login](https://signin.ollama.com/?client_id=client_01JX0QMHD43PFFCCNXH82A6K8B&redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8)
-- [Sign Up](https://signin.ollama.com/sign-up?redirect_uri=https%3A%2F%2Follama.com%2Fauth%2Fcallback&authorization_session_id=01KE5QZJQP6W24EJGN9TYDR5K8)
+- [Getting started](https://docs.ollama.com/quickstart)
 - [Pricing](https://ollama.com/cloud)
-- [Git Hub](https://github.com/ollama/ollama)
-- [Blog](https://ollama.ai/blog)
-- [Models](https://ollama.ai/library)
-- [OpenAPI](https://docs.ollama.com/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://docs.ollama.com/quickstart)
-- [Authentication](https://docs.ollama.com/api/authentication)
-- [Pricing](https://ollama.com/pricing)
-- [Downloads](https://ollama.com/download)
-- [Models](https://ollama.com/search)
-- [Blog](https://ollama.com/blog)
 - [Changelog](https://github.com/ollama/ollama/releases)
+- [Blog](https://ollama.ai/blog)
 - [Security](https://github.com/ollama/ollama/security)
-- [Python S D K](https://github.com/ollama/ollama-python)
-- [Java Script S D K](https://github.com/ollama/ollama-js)
-- [Discord](https://discord.gg/ollama)
-- [Reddit](https://reddit.com/r/ollama)
-- [X (Twitter)](https://twitter.com/ollama)
-- [LinkedIn](https://www.linkedin.com/company/ollama)
-- [Documentation](https://docs.ollama.com/capabilities/tool-calling)
-- [Documentation](https://docs.ollama.com/capabilities/structured-outputs)
-- [Documentation](https://docs.ollama.com/capabilities/vision)
-- [Documentation](https://docs.ollama.com/capabilities/embeddings)
-- [Documentation](https://docs.ollama.com/capabilities/thinking)
-- [Documentation](https://docs.ollama.com/capabilities/web-search)
-- [Documentation](https://docs.ollama.com/capabilities/streaming)
-- [Integrations](https://docs.ollama.com/integrations)
-- [Docker](https://docs.ollama.com/docker)
-- [Documentation](https://docs.ollama.com/modelfile)
-- [C L I](https://docs.ollama.com/cli)
-- [Documentation](https://docs.ollama.com/gpu)
-- [Troubleshooting](https://docs.ollama.com/troubleshooting)
-- [Documentation](https://docs.ollama.com/import)
-- [Documentation](https://docs.ollama.com/context-length)
-- [Dart  S D K](https://github.com/ollama/ollama-dart)
-- [Swift  S D K](https://github.com/ollama/ollama-swift)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/ollama)
-- [YouTube](https://www.youtube.com/@Ollama-AI)
-- [GitHub Organization](https://github.com/ollama)
-- [Issue  Tracker](https://github.com/ollama/ollama/issues)
-- [Events](https://ollama.com/events)
-- [Go  S D K](https://pkg.go.dev/github.com/ollama/ollama/api)
-- [Documentation](https://docs.ollama.com/llms.txt)
-- [Documentation](https://docs.ollama.com/linux)
-- [Documentation](https://docs.ollama.com/macos)
-- [Documentation](https://docs.ollama.com/windows)
+- [GitHub](https://github.com/ollama)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 35.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 44.6 |
+| Contract quality | 41.3 |
+| Contract governance | 0.0 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 54.8 |
+| Access clarity | 31.6 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ollama/](https://apis.io/providers/ollama/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Ollama: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ollama/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
